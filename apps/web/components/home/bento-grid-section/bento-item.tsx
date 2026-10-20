@@ -61,7 +61,7 @@ export function BentoItem({ item, renderLayer, onExampleClick, className }: Bent
                                     onExampleClick()
                                 }}
                             >
-                                Example Wallpaper
+                                示例壁纸
                             </Button>
                         </div>
                     )}

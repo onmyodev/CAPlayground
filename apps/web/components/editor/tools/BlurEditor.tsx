@@ -79,7 +79,7 @@ export function BlurEditor({
         canvas.toBlob(
           (blob) => {
             if (!blob) {
-              reject(new Error("Failed to create blurred image"));
+              reject(new Error("无法创建模糊后的图片"));
               return;
             }
             const name = filename || "blurred-image.png";
@@ -102,9 +102,9 @@ export function BlurEditor({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Blur Image</DialogTitle>
+          <DialogTitle>模糊图片</DialogTitle>
           <DialogDescription>
-            Adjust the blur amount and apply to replace the current image.
+            调整模糊程度并应用，以替换当前图片。
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
@@ -130,7 +130,7 @@ export function BlurEditor({
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="blur-amount">Blur Amount: {blurAmount}px</Label>
+              <Label htmlFor="blur-amount">模糊程度：{blurAmount}px</Label>
             </div>
             <Slider
               id="blur-amount"
@@ -148,10 +148,10 @@ export function BlurEditor({
               variant="outline"
               onClick={() => onOpenChange(false)}
             >
-              Cancel
+              取消
             </Button>
             <Button type="button" onClick={handleApply} disabled={applying}>
-              {applying ? "Applying..." : "Apply Blur"}
+              {applying ? "应用中…" : "应用模糊"}
             </Button>
           </div>
         </div>

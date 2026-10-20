@@ -45,8 +45,8 @@ export function BentoLiquidGlassLayer() {
             ) : (
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md">
                     <div className="px-6 py-4 bg-black/40 border border-white/10 rounded-2xl flex flex-col items-center text-center max-w-[80%]">
-                        <span className="text-white font-bold text-lg tracking-tight mb-1">Unsupported Browser</span>
-                        <span className="text-zinc-400 text-xs">Liquid effects require a Chromium-based browser (Chrome, Edge, Brave).</span>
+                        <span className="text-white font-bold text-lg tracking-tight mb-1">浏览器不受支持</span>
+                        <span className="text-zinc-400 text-xs">液态效果需要基于 Chromium 的浏览器（Chrome、Edge、Brave）。</span>
                     </div>
                 </div>
             )}

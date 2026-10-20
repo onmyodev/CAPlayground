@@ -97,22 +97,22 @@ export function LayerContextMenu({ layer, children, siblings }: LayerContextMenu
       <ContextMenu>
         <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
         <ContextMenuContent className="w-48">
-          <ContextMenuItem disabled={!canSendToFront} onSelect={sendToFront}>Bring to Front</ContextMenuItem>
-          <ContextMenuItem disabled={!canBringForward} onSelect={bringForward}>Bring Forward</ContextMenuItem>
-          <ContextMenuItem disabled={!canSendBackward} onSelect={sendBackward}>Send Backward</ContextMenuItem>
-          <ContextMenuItem disabled={!canSendToBack} onSelect={sendToBack}>Send to Back</ContextMenuItem>
+          <ContextMenuItem disabled={!canSendToFront} onSelect={sendToFront}>移到最前</ContextMenuItem>
+          <ContextMenuItem disabled={!canBringForward} onSelect={bringForward}>上移一层</ContextMenuItem>
+          <ContextMenuItem disabled={!canSendBackward} onSelect={sendBackward}>下移一层</ContextMenuItem>
+          <ContextMenuItem disabled={!canSendToBack} onSelect={sendToBack}>移到最后</ContextMenuItem>
           <ContextMenuSeparator />
-          <ContextMenuItem onSelect={openRename}>Rename…</ContextMenuItem>
-          <ContextMenuItem onSelect={duplicate}>Duplicate</ContextMenuItem>
-          <ContextMenuItem variant="destructive" onSelect={remove}>Delete</ContextMenuItem>
+          <ContextMenuItem onSelect={openRename}>重命名…</ContextMenuItem>
+          <ContextMenuItem onSelect={duplicate}>创建副本</ContextMenuItem>
+          <ContextMenuItem variant="destructive" onSelect={remove}>删除</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
 
       <Dialog open={renameOpen} onOpenChange={setRenameOpen}>
         <DialogContent className="sm:max-w-[420px]">
           <DialogHeader>
-            <DialogTitle>Rename layer</DialogTitle>
-            <DialogDescription>Give this layer a nice new name.</DialogDescription>
+            <DialogTitle>重命名图层</DialogTitle>
+            <DialogDescription>为这个图层起一个新名称。</DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-2">
             <Input
@@ -120,12 +120,12 @@ export function LayerContextMenu({ layer, children, siblings }: LayerContextMenu
               value={nameVal}
               onChange={(e) => setNameVal(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') submitRename(); }}
-              placeholder="Layer name"
+              placeholder="图层名称"
             />
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setRenameOpen(false)}>Cancel</Button>
-            <Button onClick={submitRename}>Save</Button>
+            <Button variant="outline" onClick={() => setRenameOpen(false)}>取消</Button>
+            <Button onClick={submitRename}>保存</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

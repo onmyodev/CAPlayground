@@ -412,14 +412,14 @@ export function CanvasPreview() {
                 size="icon"
                 variant={useGyroControls ? "default" : "outline"}
                 aria-pressed={useGyroControls}
-                aria-label="Toggle gyro"
+                aria-label="切换陀螺仪"
                 onClick={() => setUseGyroControls((v: boolean) => !v)}
                 className={`h-8 w-8 ${useGyroControls ? '' : 'hover:text-primary hover:border-primary/50 hover:bg-primary/10'}`}
               >
                 <Rotate3D className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="left">Gyro</TooltipContent>
+            <TooltipContent side="left">陀螺仪</TooltipContent>
           </Tooltip>
         )}
         <Tooltip>
@@ -429,14 +429,14 @@ export function CanvasPreview() {
               size="icon"
               variant={showPreview ? "default" : "outline"}
               aria-pressed={showPreview}
-              aria-label="Toggle preview"
+              aria-label="切换预览"
               onClick={() => setShowPreview((v: boolean) => !v)}
               className={`h-8 w-8 ${showPreview ? '' : 'hover:text-primary hover:border-primary/50 hover:bg-primary/10'}`}
             >
               <TabletSmartphone className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Show Preview</TooltipContent>
+          <TooltipContent side="left">显示预览</TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -445,14 +445,14 @@ export function CanvasPreview() {
               size="icon"
               variant={showEdgeGuide ? "default" : "outline"}
               aria-pressed={showEdgeGuide}
-              aria-label="Toggle edge guide"
+              aria-label="切换边缘参考线"
               onClick={() => setShowEdgeGuide((v: boolean) => !v)}
               className={`h-8 w-8 ${showEdgeGuide ? '' : 'hover:text-primary hover:border-primary/50 hover:bg-primary/10'}`}
             >
               <Square className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Edge guide</TooltipContent>
+          <TooltipContent side="left">边缘参考线</TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -461,14 +461,14 @@ export function CanvasPreview() {
               size="icon"
               variant={clipToCanvas ? "default" : "outline"}
               aria-pressed={clipToCanvas}
-              aria-label="Toggle clip to canvas"
+              aria-label="切换裁剪到画布"
               onClick={() => setClipToCanvas((v: boolean) => !v)}
               className={`h-8 w-8 ${clipToCanvas ? '' : 'hover:text-primary hover:border-primary/50 hover:bg-primary/10'}`}
             >
               <Crop className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Clip to canvas</TooltipContent>
+          <TooltipContent side="left">裁剪到画布</TooltipContent>
         </Tooltip>
       </div>
 
@@ -479,7 +479,7 @@ export function CanvasPreview() {
             <Button
               size="icon"
               variant="outline"
-              aria-label="Zoom in"
+              aria-label="放大"
               onClick={() => {
                 if (!ref.current) return;
                 const rect = ref.current.getBoundingClientRect();
@@ -498,14 +498,14 @@ export function CanvasPreview() {
               <Plus className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Zoom in</TooltipContent>
+          <TooltipContent side="left">放大</TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               size="icon"
               variant="outline"
-              aria-label="Zoom out"
+              aria-label="缩小"
               onClick={() => {
                 if (!ref.current) return;
                 const rect = ref.current.getBoundingClientRect();
@@ -524,14 +524,14 @@ export function CanvasPreview() {
               <Minus className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Zoom out</TooltipContent>
+          <TooltipContent side="left">缩小</TooltipContent>
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
               size="icon"
               variant="outline"
-              aria-label="Re-center"
+              aria-label="重新居中"
               onClick={() => {
                 setUserScale(1);
                 setPan({ x: 0, y: 0 });
@@ -540,7 +540,7 @@ export function CanvasPreview() {
               <Crosshair className="h-4 w-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="left">Re-center</TooltipContent>
+          <TooltipContent side="left">重新居中</TooltipContent>
         </Tooltip>
       </div>
 

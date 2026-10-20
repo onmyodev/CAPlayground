@@ -31,7 +31,7 @@ export default function EmitterCellThumbnail({
   return (
     <img
       src={src}
-      alt="Cell"
+      alt="单元"
       width={size}
       height={size}
       className={className}

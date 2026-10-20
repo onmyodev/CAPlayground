@@ -157,7 +157,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 px-2">
                 <ArrowLeft className="h-4 w-4" />
-                <span className="hidden sm:inline ml-2">{doc?.meta.name ?? "Project"}</span>
+                <span className="hidden sm:inline ml-2">{doc?.meta.name ?? "项目"}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-52">
@@ -165,13 +165,13 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                 className="cursor-pointer"
                 onClick={async () => { await flushPersist(); router.push('/projects'); }}
               >
-                <ArrowLeft className="h-4 w-4 mr-2" /> Back to projects
+                <ArrowLeft className="h-4 w-4 mr-2" /> 返回项目列表
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer" onClick={() => setRenameOpen(true)}>
-                <Pencil className="h-4 w-4 mr-2" /> Rename
+                <Pencil className="h-4 w-4 mr-2" /> 重命名
               </DropdownMenuItem>
               <DropdownMenuItem className="text-destructive cursor-pointer" onClick={() => setDeleteOpen(true)}>
-                <Trash2 className="h-4 w-4 mr-2" /> Delete
+                <Trash2 className="h-4 w-4 mr-2" /> 删除
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -182,7 +182,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             variant="ghost"
             size="icon"
             className="h-8 w-8 p-0"
-            aria-label="Undo"
+            aria-label="撤销"
             title={`${typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Z`}
             onClick={() => undo()}
           >
@@ -192,7 +192,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             variant="ghost"
             size="icon"
             className="h-8 w-8 p-0"
-            aria-label="Redo"
+            aria-label="重做"
             title={`${typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Shift + Z`}
             onClick={() => redo()}
           >
@@ -205,9 +205,9 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             <button
               className="text-xs px-2 py-0.5 rounded-full border border-muted-foreground/50 text-muted-foreground cursor-pointer hover:border-muted-foreground transition-colors"
               onClick={async () => { await flushPersist(); setShowManualSave(false); }}
-              title="Save now"
+              title="立即保存"
             >
-              Manual Save
+              手动保存
             </button>
           ) : (
             <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
               <div
                 className="flex items-center gap-1.5"
                 aria-live="polite"
-                title={`${savingStatus === 'saving' ? 'Saving…' : savingStatus === 'saved' ? 'Saved' : 'Idle'}${lastSavedAt ? ` - Last saved ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}`}
+                title={`${savingStatus === 'saving' ? '保存中…' : savingStatus === 'saved' ? '已保存' : '空闲'}${lastSavedAt ? ` - 上次保存 ${new Date(lastSavedAt).toLocaleTimeString()}` : ''}`}
               >
                 <div
                   className={`w-2 h-2 rounded-full ${savingStatus === 'saving'
@@ -233,7 +233,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                         : 'text-muted-foreground'
                     }`}
                 >
-                  {savingStatus === 'saving' ? 'Saving…' : savingStatus === 'saved' ? 'Saved' : 'Idle'}
+                  {savingStatus === 'saving' ? '保存中…' : savingStatus === 'saved' ? '已保存' : '空闲'}
                 </span>
               </div>
             </div>
@@ -250,7 +250,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                 className="h-8 px-2 gap-2 cursor-default"
                 disabled
               >
-                <span className="text-sm">Wallpaper</span>
+                <span className="text-sm">壁纸</span>
               </Button>
             ) : (
               <DropdownMenu>
@@ -258,24 +258,24 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                   <Button
                     variant="ghost"
                     className="h-8 px-2 gap-2"
-                    aria-label={`Active CA: ${activeCA === 'floating' ? 'Floating' : 'Background'}`}
+                    aria-label={`当前 CA：${activeCA === 'floating' ? '浮动' : '背景'}`}
                     aria-expanded={false}
                     role="button"
                   >
-                    <span className="text-sm">{activeCA === 'floating' ? 'Floating' : 'Background'}</span>
+                    <span className="text-sm">{activeCA === 'floating' ? '浮动' : '背景'}</span>
                     <ArrowUpDown className="h-4 w-4 opacity-70" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-80 p-2">
                   <DropdownMenuLabel>
-                    <div className="text-sm font-medium">Choose Active CA</div>
+                    <div className="text-sm font-medium">选择当前 CA</div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   {activeCA === 'floating' && (
                     <>
                       <div className="px-2 py-2">
                         <div className="flex items-center justify-between gap-3">
-                          <Label htmlFor="show-background" className="text-sm">Show background</Label>
+                          <Label htmlFor="show-background" className="text-sm">显示背景</Label>
                           <Switch id="show-background" checked={showBackground} onCheckedChange={setShowBackground} />
                         </div>
                       </div>
@@ -293,8 +293,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                       <div className="flex items-center gap-3">
                         <LayersIcon className="h-4 w-4" />
                         <div className="flex-1 text-left">
-                          <div>Background</div>
-                          <div className="text-xs text-muted-foreground">Appears behind the clock.</div>
+                          <div>背景</div>
+                          <div className="text-xs text-muted-foreground">显示在时钟后面。</div>
                         </div>
                         {activeCA === 'background' && <Check className="h-4 w-4" />}
                       </div>
@@ -309,8 +309,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
                       <div className="flex items-center gap-3">
                         <LayersIcon className="h-4 w-4" />
                         <div className="flex-1 text-left">
-                          <div>Floating</div>
-                          <div className="text-xs text-muted-foreground">Appears over the clock.</div>
+                          <div>浮动</div>
+                          <div className="text-xs text-muted-foreground">显示在时钟上方。</div>
                         </div>
                         {activeCA === 'floating' && <Check className="h-4 w-4" />}
                       </div>
@@ -326,8 +326,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             variant="ghost"
             size="icon"
             className="h-8 w-8 p-0"
-            title={showLeft ? "Hide left panel" : "Show left panel"}
-            aria-label={showLeft ? "Hide left panel" : "Show left panel"}
+            title={showLeft ? "隐藏左侧面板" : "显示左侧面板"}
+            aria-label={showLeft ? "隐藏左侧面板" : "显示左侧面板"}
             onClick={() => toggleLeft?.()}
           >
             <PanelLeft className={`h-4 w-4 ${showLeft ? '' : 'opacity-50'}`} />
@@ -336,8 +336,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             variant="ghost"
             size="icon"
             className="h-8 w-8 p-0"
-            title={showRight ? "Hide right panel" : "Show right panel"}
-            aria-label={showRight ? "Hide right panel" : "Show right panel"}
+            title={showRight ? "隐藏右侧面板" : "显示右侧面板"}
+            aria-label={showRight ? "隐藏右侧面板" : "显示右侧面板"}
             onClick={() => toggleRight?.()}
           >
             <PanelRight className={`h-4 w-4 ${showRight ? '' : 'opacity-50'}`} />
@@ -348,7 +348,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Toggle theme"
+            aria-label="切换主题"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="h-8 w-8 p-0"
           >
@@ -365,7 +365,7 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             variant="ghost"
             size="icon"
             className="h-8 w-8 p-0"
-            aria-label="Settings"
+            aria-label="设置"
             data-tour-id="settings-button"
             onClick={() => setSettingsOpen(true)}
           >
@@ -379,67 +379,67 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
       <Dialog open={shortcutsOpen} onOpenChange={setShortcutsOpen}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>Keyboard Shortcuts</DialogTitle>
+            <DialogTitle>键盘快捷键</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
-              <span>Undo</span>
+              <span>撤销</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Z</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Redo</span>
+              <span>重做</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Shift + Z</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Zoom in</span>
+              <span>放大</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + +</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Zoom out</span>
+              <span>缩小</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + -</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Re-center</span>
+              <span>重新居中</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + 0</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Export</span>
+              <span>导出</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + E</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Zoom with scroll</span>
+              <span>滚动缩放</span>
               <span className="font-mono text-muted-foreground">Shift + Scroll</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Pan canvas</span>
-              <span className="font-mono text-muted-foreground">Middle Click + Drag</span>
+              <span>平移画布</span>
+              <span className="font-mono text-muted-foreground">中键拖动</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Pan canvas (alt)</span>
+              <span>平移画布（备选）</span>
               <span className="font-mono text-muted-foreground">Shift + Drag</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Toggle left panel</span>
+              <span>切换左侧面板</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Shift + L</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Toggle right panel</span>
+              <span>切换右侧面板</span>
               <span className="font-mono text-muted-foreground">{typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'} + Shift + I</span>
             </div>
             <div className="flex items-center justify-between border-t pt-2 mt-2">
-              <span className="font-medium">Inspector Inputs</span>
+              <span className="font-medium">属性面板输入</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Change value (horizontal)</span>
-              <span className="font-mono text-muted-foreground">Drag</span>
+              <span>调整数值（水平）</span>
+              <span className="font-mono text-muted-foreground">拖动</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Change value (slower)</span>
+              <span>调整数值（更慢）</span>
               <span className="font-mono text-muted-foreground">Shift + Drag</span>
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShortcutsOpen(false)}>Close</Button>
+            <Button variant="outline" onClick={() => setShortcutsOpen(false)}>关闭</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -448,8 +448,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
       <Dialog open={renameOpen} onOpenChange={setRenameOpen}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>Rename Project</DialogTitle>
-            <DialogDescription>Update the name of your project.</DialogDescription>
+            <DialogTitle>重命名项目</DialogTitle>
+            <DialogDescription>更新你的项目名称。</DialogDescription>
           </DialogHeader>
           <Input
             value={name}
@@ -461,8 +461,8 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
             }}
           />
           <DialogFooter>
-            <Button variant="outline" onClick={() => setRenameOpen(false)}>Cancel</Button>
-            <Button onClick={performRename} disabled={!name.trim()}>Save</Button>
+            <Button variant="outline" onClick={() => setRenameOpen(false)}>取消</Button>
+            <Button onClick={performRename} disabled={!name.trim()}>保存</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -471,15 +471,15 @@ export function MenuBar({ projectId, showLeft = true, showRight = true, toggleLe
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete project?</AlertDialogTitle>
+            <AlertDialogTitle>删除项目？</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the project and its editor data.
+              此操作无法撤销。项目及其编辑器数据将被永久删除。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>取消</AlertDialogCancel>
             <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={performDelete}>
-              Delete
+              删除
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

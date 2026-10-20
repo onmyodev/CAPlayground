@@ -37,36 +37,36 @@ export function EditorOnboarding({ showLeft, showRight }: { showLeft: boolean; s
     {
       id: "layers",
       selector: '[data-tour-id="layers-panel"]',
-      title: "Layers",
-      body: "Manage the layers in your wallpaper. Click a layer to select, duplicate or delete.",
+      title: "图层",
+      body: "管理壁纸中的图层。点击图层即可选中、创建副本或删除。",
       placement: "right",
     },
     {
       id: "states",
       selector: '[data-tour-id="states-panel"]',
-      title: "States",
-      body: "Switch between states of what the wallpaper is in, like when your phone is in Locked, Unlocked, or in Sleep state. You can make state transitions here.",
+      title: "状态",
+      body: "在壁纸所处状态之间切换，例如手机处于锁定、解锁或睡眠状态时。你可以在这里制作状态过渡。",
       placement: "right",
     },
     {
       id: "canvas",
       selector: '[data-tour-id="canvas"]',
-      title: "Canvas",
-      body: "Drag, resize, and preview your layers. Use ⌘/+ / ⌘/- to zoom, Shift+Drag to pan.",
+      title: "画布",
+      body: "拖动、调整尺寸并预览你的图层。使用 ⌘/+ / ⌘/- 缩放，Shift + 拖动平移。",
       placement: "bottom",
     },
     {
       id: "inspector",
       selector: '[data-tour-id="inspector"]',
-      title: "Inspector",
-      body: "Edit geometry, compositing, content, text, images, and animations for the selected layer.",
+      title: "属性面板",
+      body: "编辑所选图层的几何属性、合成、内容、文本、图片和动画。",
       placement: "left",
     },
     {
       id: "settings",
       selector: '[data-tour-id="settings-button"]',
-      title: "Settings",
-      body: "Configure snapping behavior, see keyboard shortcuts, and reset this onboarding to view it again.",
+      title: "设置",
+      body: "配置吸附行为、查看键盘快捷键，以及重置本引导以再次查看。",
       placement: "bottom",
     },
   ], []);
@@ -193,10 +193,10 @@ export function EditorOnboarding({ showLeft, showRight }: { showLeft: boolean; s
         <div className="text-sm font-medium mb-1">{step.title}</div>
         <div className="text-xs text-muted-foreground mb-3">{step.body}</div>
         <div className="flex items-center justify-between">
-          <Button variant="outline" size="sm" onClick={goPrev}>Back</Button>
+          <Button variant="outline" size="sm" onClick={goPrev}>返回</Button>
           <div className="flex items-center gap-2">
             {!isLast && (
-              <Button variant="ghost" size="sm" onClick={finish}>Skip</Button>
+              <Button variant="ghost" size="sm" onClick={finish}>跳过</Button>
             )}
             {isLast && (
               <Button
@@ -204,10 +204,10 @@ export function EditorOnboarding({ showLeft, showRight }: { showLeft: boolean; s
                 size="sm"
                 onClick={() => { if (typeof window !== 'undefined') window.open('https://docs.enkei64.xyz', '_blank', 'noopener,noreferrer'); }}
               >
-                Documentation
+                文档
               </Button>
             )}
-            <Button size="sm" onClick={isLast ? finish : goNext}>{isLast ? 'Done' : 'Next'}</Button>
+            <Button size="sm" onClick={isLast ? finish : goNext}>{isLast ? '完成' : '下一步'}</Button>
           </div>
         </div>
       </div>

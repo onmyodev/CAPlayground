@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   const { theme, setTheme } = useTheme()
   
   useEffect(() => {
-    document.title = "CAPlayground - Privacy Policy";
+    document.title = "CAPlayground - 隐私政策";
   }, []);
 
   return (
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       <div className="absolute left-4 top-4">
         <Link href="/">
           <Button variant="ghost" size="sm" className="h-8 px-2">
-            <ArrowLeft className="h-4 w-4 mr-1" /> Back
+            <ArrowLeft className="h-4 w-4 mr-1" /> 返回
           </Button>
         </Link>
       </div>
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
         <Button
           variant="ghost"
           size="icon"
-          aria-label="Toggle theme"
+          aria-label="切换主题"
           className="rounded-full h-9 w-9 p-0"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
@@ -39,124 +39,93 @@ export default function PrivacyPage() {
 
       <div className="mx-auto max-w-3xl">
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Privacy Policy</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Last Updated: 20th October 2025</p>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">隐私政策</h1>
+          <p className="mt-2 text-sm text-muted-foreground">最后更新：2025 年 10 月 20 日</p>
         </div>
 
         {/* Paper container */}
         <div className="rounded-2xl bg-card text-card-foreground shadow-lg ring-1 ring-black/5 border border-border p-6 sm:p-10 text-base sm:text-lg">
           <p className="mt-0 leading-7">
-            This Privacy Policy explains how CAPlayground ("we", "us") collects, uses, and protects your information. It
-            applies to your use of the CAPlayground website and application (the "Service").
+            本隐私政策说明 CAPlayground（「我们」）如何收集、使用和保护你的信息。本政策适用于你对 CAPlayground
+            网站与应用程序（「服务」）的使用。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">1. Information We Collect</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">1. 我们收集的信息</h2>
           <ul className="mt-6 list-disc pl-6 space-y-3">
             <li>
-              <strong>NO Local Projects</strong>: By default, your projects are stored locally on your device (using browser IndexedDB or OPFS). We do not receive your local projects unless you explicitly upload or share them.
+              <strong>本地项目不会被收集</strong>：默认情况下，你的项目存储在你设备的本地（使用浏览器的 IndexedDB 或 OPFS）。除非你主动上传或分享，否则我们不会收到你的本地项目。
             </li>
             <li>
-              <strong>Cloud Projects (Optional)</strong>: You can optionally use Cloud Projects by signing in to Google Drive. When you do this, your project files are stored in YOUR Google Drive account, not on CAPlayground servers. We do not receive, store, or have access to your Cloud Projects. All data is transmitted directly between your browser and Google Drive.
+              <strong>设备与使用情况</strong>：维持服务运行所需的基础技术信息，例如设备/浏览器类型以及交互行为。除本政策所述情况外，我们不会运行第三方分析。
             </li>
             <li>
-              <strong>Account Information</strong>: If you create an account via Supabase using email/password or Google OAuth,
-              we process your email, necessary authentication identifiers (e.g., provider and user ID), and optional profile
-              information required to operate the Service.
-            </li>
-            <li>
-              <strong>Device & Usage</strong>: Basic technical information such as device/browser type and interactions needed to
-              operate the Service. We do not run third-party analytics unless stated here.
-            </li>
-            <li>
-              <strong>Cookies & Local Storage</strong>: We use necessary cookies/localStorage for session, preferences, and product
-              features (e.g., first-time Terms acceptance: <code>caplayground-tos-accepted</code>). If you sign in to Google Drive, we store authentication tokens in secure, httpOnly cookies (<code>google_drive_access_token</code>, <code>google_drive_refresh_token</code>, <code>google_drive_token_expiry</code>) to maintain your Drive session and authenticate API requests on your behalf.
+              <strong>Cookie 与本地存储</strong>：我们使用必要的 localStorage 来保存偏好设置和产品功能。我们不会将 Cookie 用于身份验证或广告。
             </li>
           </ul>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">2. How We Use Information</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">2. 我们如何使用信息</h2>
           <ul className="mt-6 list-disc pl-6 space-y-3">
-            <li>Provide and improve the Service and its features.</li>
-            <li>Authenticate users and secure accounts.</li>
-            <li>Prevent abuse and ensure the reliability of the Service.</li>
-            <li>Communicate important updates related to your account or the Service.</li>
+            <li>提供并改进服务及其功能。</li>
+            <li>防止滥用并确保服务的可靠性。</li>
+            <li>传达与服务相关的重要更新。</li>
           </ul>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">3. Analytics</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">3. 分析</h2>
           <p className="mt-6 leading-7">
-            We use privacy conscious analytics to understand usage and improve CAPlayground. This includes:
+            我们使用注重隐私的分析工具来了解使用情况并改进 CAPlayground，其中包括：
           </p>
           <ul className="mt-4 list-disc pl-6 space-y-3">
             <li>
-              <strong>Page Views</strong>: Page URL, title, referrer, timestamp, and a session ID.
+              <strong>页面浏览</strong>：页面 URL、标题、来源、时间戳以及会话 ID。
             </li>
             <li>
-              <strong>Sessions</strong>: Session duration, start/end time, number of pages visited, and basic bounce detection.
+              <strong>会话</strong>：会话时长、开始/结束时间、访问页面数量，以及基础的跳出检测。
             </li>
             <li>
-              <strong>Performance</strong>: Page load time, DOM content loaded, first paint/first contentful paint, and resource
-              timing metrics.
+              <strong>性能</strong>：页面加载时间、DOM 内容加载完成时间、首次绘制/首次内容绘制，以及资源计时指标。
             </li>
             <li>
-              <strong>Aggregate Counters</strong>: We also keep aggregate-only counts for certain product events (projects
-              created). These counters are stored without user identifiers and used for product planning. The contents in your projects are not collected.
+              <strong>聚合计数器</strong>：我们还会针对某些产品事件（创建的项目数）保留仅聚合的计数。这些计数器在不含用户标识的情况下存储，用于产品规划。你的项目内容不会被收集。
             </li>
           </ul>
           <p className="mt-4 text-muted-foreground">
-            We do not use analytics for advertising, and we do not intentionally collect sensitive identifiers (such as precise
-            location or device fingerprinting data) for analytics.
+            我们不会将分析数据用于广告，也不会故意为分析目的收集敏感标识（例如精确位置或设备指纹数据）。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">4. Third Parties</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">4. 第三方</h2>
           <p className="mt-6 leading-7">
-            We use Supabase for authentication and backend infrastructure. Supabase may process data necessary to provide those
-            services and may maintain operational logs (e.g., auth events). We also use PostHog for privacy focused
-            analytics as described above. PostHog data is proxied through our own domain to improve reliability. Refer to those providers' documentation/policies for more details.
-          </p>
-          <p className="mt-4 leading-7">
-            <strong>Google Drive (Optional)</strong>: If you choose to use Cloud Projects, we integrate with Google Drive to store your project files. Your project files are stored in YOUR Google Drive account in a folder named "CAPlayground". We access only files created by CAPlayground. Your use of Google Drive is subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Google's Privacy Policy</a>. You can revoke CAPlayground's access to your Drive at any time through your Google account settings.
+            我们使用 Supabase 作为后端基础设施，用于存储壁纸下载的聚合计数。我们还使用 PostHog 提供上述注重隐私的分析。PostHog 的数据通过我们自己的域名代理以提升可靠性。更多细节请参阅这些服务提供商的文档/政策。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">5. Data Retention</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">5. 数据保留</h2>
           <ul className="mt-6 list-disc pl-6 space-y-3">
-            <li>Local projects remain on your device until you remove them.</li>
-            <li>Cloud Projects remain in your Google Drive until you delete them. Deleting your CAPlayground account does NOT automatically delete your Cloud Projects from Google Drive. You must manually delete them using the "Delete All" feature in the dashboard or directly from Google Drive.</li>
-            <li>Account data is retained while your account is active. If you delete your account, we delete associated account data
-              except where retention is required by law.</li>
-            <li>Google Drive authentication cookies are cleared when you sign out from Google Drive or when they expire.</li>
+            <li>本地项目会保留在你的设备上，直到你将其删除。</li>
+            <li>聚合计数器不包含账户标识，并可能为产品规划而保留。</li>
           </ul>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">6. Your Rights</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">6. 你的权利</h2>
           <p className="mt-6 leading-7">
-            Depending on your location, you may have rights to access, correct, or delete your data. We are planning an account
-            deletion endpoint in the app. You can also contact us to exercise your rights.
+            根据你所在的地区，你可能有权访问、更正或删除你的数据。如需行使这些权利，请联系我们。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">7. Children’s Privacy</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">7. 儿童隐私</h2>
           <p className="mt-6 leading-7">
-            The Service is not intended for children under the age specified in our Terms of Service. If you believe a child has
-            provided us personal data, contact us and we will take appropriate steps.
+            本服务不面向 13 岁以下的儿童，也不面向低于其所在国家数字同意最低年龄的儿童。如果你认为有儿童向我们提供了个人数据，请联系我们，我们将采取适当措施。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">8. International Transfers</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">8. 跨境传输</h2>
           <p className="mt-6 leading-7">
-            Data may be processed in regions where our providers operate. We take steps to ensure appropriate safeguards consistent
-            with applicable laws.
+            数据可能会在我们的服务提供商运营的地区被处理。我们会采取措施，确保符合适用法律的适当保障。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">9. Changes to This Policy</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">9. 本政策的变更</h2>
           <p className="mt-6 leading-7">
-            We may update this Privacy Policy from time to time. We will update the "Last Updated" date above and, when
-            appropriate, provide additional notice.
+            我们可能会不时更新本隐私政策。我们会更新上方的「最后更新」日期，并在适当情况下提供额外通知。
           </p>
 
-          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">10. Contact</h2>
+          <h2 className="mt-12 text-3xl md:text-4xl font-semibold">10. 联系我们</h2>
           <p className="mt-6 leading-7">
-            Questions? Contact us at <a className="underline" href="mailto:support@enkei64.xyz">support@enkei64.xyz</a>.
-          </p>
-
-          <p className="mt-10 text-sm text-muted-foreground">
-            Also see our {" "}
-            <Link href="/tos" className="underline">Terms of Service</Link>.
+            有疑问？请通过 <a className="underline" href="mailto:support@enkei64.xyz">support@enkei64.xyz</a> 联系我们。
           </p>
         </div>
       </div>

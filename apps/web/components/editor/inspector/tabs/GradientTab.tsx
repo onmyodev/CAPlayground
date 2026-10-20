@@ -21,23 +21,23 @@ export function GradientTab({
     <div className="space-y-4">
       {/* Gradient Type */}
       <div className="space-y-1">
-        <Label>Type</Label>
+        <Label>类型</Label>
         <Select value={(selected as any).gradientType || 'axial'}
           onValueChange={(v) => updateLayer(selected.id, { gradientType: v } as any)}>
           <SelectTrigger className="h-8 text-xs">
-            <SelectValue placeholder="Select type" />
+            <SelectValue placeholder="选择类型" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="axial">Axial (Linear)</SelectItem>
-            <SelectItem value="radial">Radial</SelectItem>
-            <SelectItem value="conic">Conic</SelectItem>
+            <SelectItem value="axial">轴向（线性）</SelectItem>
+            <SelectItem value="radial">径向</SelectItem>
+            <SelectItem value="conic">锥形</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       {/* Start Point */}
       <div className="space-y-1">
-        <Label htmlFor="startPointX">Start Point X</Label>
+        <Label htmlFor="startPointX">起点 X</Label>
         <div className="flex items-center gap-2 w-full">
           <Slider
             id="startPointX"
@@ -80,7 +80,7 @@ export function GradientTab({
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="startPointY">Start Point Y</Label>
+        <Label htmlFor="startPointY">起点 Y</Label>
         <div className="flex items-center gap-2 w-full">
           <Slider
             id="startPointY"
@@ -124,7 +124,7 @@ export function GradientTab({
 
       {/* End Point */}
       <div className="space-y-1">
-        <Label htmlFor="endPointX">End Point X</Label>
+        <Label htmlFor="endPointX">终点 X</Label>
         <div className="flex items-center gap-2 w-full">
           <Slider
             id="endPointX"
@@ -167,7 +167,7 @@ export function GradientTab({
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="endPointY">End Point Y</Label>
+        <Label htmlFor="endPointY">终点 Y</Label>
         <div className="flex items-center gap-2 w-full">
           <Slider
             id="endPointY"
@@ -212,7 +212,7 @@ export function GradientTab({
       {/* Colors */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label>Colors</Label>
+          <Label>颜色</Label>
           <Button
             type="button"
             size="sm"
@@ -222,7 +222,7 @@ export function GradientTab({
               updateLayer(selected.id, { colors: [...colors, { color: '#ffffff', opacity: 1 }] } as any);
             }}
           >
-            + Add color
+            + 添加颜色
           </Button>
         </div>
         <div className="space-y-2">
@@ -239,7 +239,7 @@ export function GradientTab({
                 }}
               />
               <div className="flex-1 space-y-1">
-                <Label className="text-xs text-muted-foreground">Opacity</Label>
+                <Label className="text-xs text-muted-foreground">不透明度</Label>
                 <div className="flex items-center gap-2">
                   <Slider
                     value={[Math.round((gradColor.opacity ?? 1) * 100)]}

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import Link from "next/link"
-import { Send, Filter as NotificationIcon, Github, Star, Download } from "lucide-react"
+import { Send, Filter as NotificationIcon, Download } from "lucide-react"
 import Image from "next/image"
 import { BentoGridSection } from "@/components/home/bento-grid-section"
 
@@ -33,32 +33,8 @@ function isVideo(src: string) {
 }
 
 export default async function HomePage() {
-  let stars: number | null = null
-  let commitCount: number | null = null
   let mostDownloaded: { wallpaper: WallpaperItem; baseUrl: string; downloads: number } | null = null
   try {
-    const res = await fetch(
-      "https://api.github.com/repos/CAPlayground/CAPlayground",
-      { next: { revalidate: 3600 }, headers: { Accept: "application/vnd.github+json" } }
-    )
-    if (res.ok) {
-      const data = await res.json()
-      stars = typeof data?.stargazers_count === "number" ? data.stargazers_count : null
-    }
-
-    const commitsRes = await fetch(
-      "https://api.github.com/repos/CAPlayground/CAPlayground/commits?per_page=1",
-      { next: { revalidate: 3600 }, headers: { Accept: "application/vnd.github+json" } }
-    )
-    if (commitsRes.ok) {
-      const link = commitsRes.headers.get("link")
-      if (link) {
-        const match = link.match(/page=(\d+)>; rel="last"/)
-        if (match) {
-          commitCount = parseInt(match[1])
-        }
-      }
-    }
     try {
       const wallpapersRes = await fetch(
         "https://raw.githubusercontent.com/CAPlayground/wallpapers/refs/heads/main/wallpapers.json",
@@ -105,13 +81,12 @@ export default async function HomePage() {
     } catch (e) {
     }
   } catch (e) {
-    stars = null
   }
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <div
         className="fixed left-0 right-0 z-50 transition-all duration-300"
-        style={{ top: `calc(1rem + var(--unofficial-banner-height, 0px))` }}
+        style={{ top: "1rem" }}
       >
         <Navigation />
       </div>
@@ -124,14 +99,14 @@ export default async function HomePage() {
             <div className="relative w-full max-w-6xl aspect-[16/10]">
               <Image
                 src="/app-light.png"
-                alt="App Light"
+                alt="应用浅色模式"
                 fill
                 className="object-contain dark:hidden"
                 priority
               />
               <Image
                 src="/app-dark.png"
-                alt="App Dark"
+                alt="应用深色模式"
                 fill
                 className="object-contain hidden dark:block"
                 priority
@@ -149,37 +124,26 @@ export default async function HomePage() {
                   <Link href="/projects" className="inline-block">
                     <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-accent/10 backdrop-blur-md border border-accent/20 text-accent text-sm font-medium hover:bg-accent/20 transition-colors shadow-sm">
                       <NotificationIcon className="h-4 w-4 mr-2" />
-                      <span>Blending Modes and Filters are out!</span>
+                      <span>混合模式与滤镜已上线！</span>
                     </div>
                   </Link>
 
                   <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight drop-shadow-2xl">
-                    The Open Source <br />
-                    <span className="text-accent">CA Wallpaper Editor.</span>
+                    开源 <br />
+                    <span className="text-accent">CA 壁纸编辑器。</span>
                   </h1>
 
                   <p className="text-xl md:text-2xl text-muted-foreground max-w-xl font-medium drop-shadow-md">
-                    Create beautiful animated wallpapers for iOS and iPadOS on any desktop computer with CAPlayground.
+                    使用 CAPlayground 在任何桌面电脑上为 iOS 和 iPadOS 创建精美的动态壁纸。
                   </p>
 
                   <div className="pt-2">
                     <Link href="/projects" className="block w-full md:w-auto">
                       <Button size="lg" className="w-full md:w-auto h-14 px-8 text-lg min-w-[200px] bg-accent hover:bg-accent/90 text-white font-semibold shadow-lg shadow-accent/20">
-                        Get Started <Send className="ml-2 h-5 w-5" />
+                        开始使用 <Send className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
                   </div>
-                </div>
-
-                {/* Bottom Right */}
-                <div className="w-full md:w-auto flex md:justify-end">
-                  <Link href="https://github.com/CAPlayground/CAPlayground" target="_blank" rel="noopener noreferrer" className="block w-full md:w-auto">
-                    <Button size="lg" variant="outline" className="w-full md:w-auto h-14 md:h-12 px-8 text-base min-w-[200px] backdrop-blur-md bg-background/50 hover:bg-background/80 border-zinc-200 dark:border-zinc-700 shadow-lg">
-                      <Github className="mr-2 h-5 w-5" />
-                      <span>View GitHub{stars !== null ? ` ${new Intl.NumberFormat().format(stars)}` : ""}</span>
-                      {stars !== null && <Star className="ml-1 h-4 w-4 fill-current opacity-50" />}
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -190,54 +154,6 @@ export default async function HomePage() {
         <section className="bg-background relative">
           <BentoGridSection />
         </section>
-        {/* Growing Section */}
-        <section className="py-24 md:py-32 bg-background overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center mb-20">
-              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                CAPlayground is growing!
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 max-w-7xl mx-auto">
-              <div className="flex flex-col items-center text-center group">
-                <div className="relative">
-                  <span className="text-7xl sm:text-8xl md:text-6xl lg:text-8xl font-black text-accent tracking-tighter transition-transform duration-500 group-hover:scale-105 block">
-                    100k+
-                  </span>
-                </div>
-                <p className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium max-w-[250px]">
-                  users in the first 4 months
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center text-center group">
-                <div className="relative">
-                  <span className="text-7xl sm:text-8xl md:text-6xl lg:text-8xl font-black text-accent tracking-tighter transition-transform duration-500 group-hover:scale-105 block">
-                    1.5k+
-                  </span>
-                </div>
-                <p className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium max-w-[250px]">
-                  Discord server members
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center text-center group">
-                <div className="relative">
-                  <span className="text-7xl sm:text-8xl md:text-6xl lg:text-8xl font-black text-accent tracking-tighter transition-transform duration-500 group-hover:scale-105 block">
-                    {commitCount !== null ? `${commitCount}` : "500+"}
-                  </span>
-                </div>
-                <p className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium max-w-[250px]">
-                  GitHub Commits
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
         {/* Existing Most Downloaded Section */}
         {mostDownloaded && (
           <section className="py-16 md:py-24 bg-muted/30">
@@ -258,12 +174,12 @@ export default async function HomePage() {
                                 muted
                                 loop
                                 playsInline
-                                aria-label={`${mostDownloaded.wallpaper.name} preview`}
+                                aria-label={`${mostDownloaded.wallpaper.name} 预览`}
                               />
                             ) : (
                               <img
                                 src={previewUrl}
-                                alt={`${mostDownloaded.wallpaper.name} preview`}
+                                alt={`${mostDownloaded.wallpaper.name} 预览`}
                                 className="w-full h-full object-contain"
                               />
                             )
@@ -274,13 +190,13 @@ export default async function HomePage() {
                         {mostDownloaded.wallpaper.name}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
-                        by {mostDownloaded.wallpaper.creator} (submitted on {mostDownloaded.wallpaper.from})
+                        作者 {mostDownloaded.wallpaper.creator}（提交于 {mostDownloaded.wallpaper.from}）
                       </p>
                       {mostDownloaded.downloads > 0 && (
                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
                           <Download className="h-3.5 w-3.5" />
                           <span>{mostDownloaded.downloads}</span>
-                          <span>{mostDownloaded.downloads === 1 ? "Download" : "Downloads"}</span>
+                          <span>次下载</span>
                         </div>
                       )}
                       <p className="text-sm text-muted-foreground line-clamp-3">
@@ -291,21 +207,20 @@ export default async function HomePage() {
                 </div>
                 <div className="space-y-4 text-center lg:text-left">
                   <h2 className="font-heading text-3xl md:text-4xl font-bold">
-                    Explore the most downloaded wallpaper
+                    探索下载量最高的壁纸
                   </h2>
                   <p className="text-muted-foreground text-lg max-w-xl mx-auto lg:mx-0">
-                    See what the community loves most, then dive into the full gallery to discover more animated
-                    wallpapers for your devices.
+                    看看社区最喜欢的作品，然后前往完整画廊，发现更多适用于你设备的动态壁纸。
                   </p>
                   <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
                     <Link href={`/wallpapers?id=${mostDownloaded.wallpaper.id}`}>
                       <Button size="lg" className="px-6 bg-accent hover:bg-accent/90 text-white font-semibold">
-                        View this wallpaper
+                        查看此壁纸
                       </Button>
                     </Link>
                     <Link href="/wallpapers">
                       <Button size="lg" variant="outline" className="px-6">
-                        View wallpaper gallery
+                        浏览壁纸画廊
                       </Button>
                     </Link>
                   </div>

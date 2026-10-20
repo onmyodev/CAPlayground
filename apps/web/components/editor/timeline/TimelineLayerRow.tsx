@@ -254,7 +254,7 @@ function AnimationRow({
               className={`absolute top-0.5 bottom-0.5 rounded-sm ${colorClass} opacity-70 hover:opacity-100 transition-opacity ${isFirst ? 'group touch-none' : ''
                 }`}
               style={{ left: startX, width: Math.max(cycleWidthPx, 2) }}
-              title={`${animation.keyPath}: ${durationText}${speed !== 1 ? ` (${effectiveDuration.toFixed(1)}s)` : ''}${isAutoreverse ? ' (autoreverse)' : ''}${isInfinite ? ' (∞)' : repeatDurationSec ? ` × ${repeatCount}` : ''}`}
+              title={`${animation.keyPath}: ${durationText}${speed !== 1 ? ` (${effectiveDuration.toFixed(1)}s)` : ''}${isAutoreverse ? '（自动反向）' : ''}${isInfinite ? ' (∞)' : repeatDurationSec ? ` × ${repeatCount}` : ''}`}
             >
               {isFirst && (
                 <span className="absolute inset-0 flex items-center px-1 text-[10px] text-white font-medium select-none pointer-events-none overflow-hidden">
@@ -263,7 +263,7 @@ function AnimationRow({
               )}
               {isAutoreverse && repeatIdx % 2 === 1 && (
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] text-white font-medium select-none pointer-events-none overflow-hidden">
-                  <span className="truncate">← reverse</span>
+                  <span className="truncate">← 反向</span>
                 </span>
               )}
               {isFirst && (

@@ -8,7 +8,7 @@ export async function GET() {
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     
     if (!supabaseUrl || !supabaseAnonKey) {
-      return NextResponse.json({ error: "Database not configured" }, { status: 500 })
+      return NextResponse.json({ error: "数据库未配置" }, { status: 500 })
     }
 
     const response = await fetch(
@@ -24,13 +24,13 @@ export async function GET() {
 
     if (!response.ok) {
       console.error("Failed to fetch stats:", await response.text())
-      return NextResponse.json({ error: "Failed to fetch stats" }, { status: 500 })
+      return NextResponse.json({ error: "获取统计数据失败" }, { status: 500 })
     }
 
     const stats = await response.json()
     return NextResponse.json(stats)
   } catch (error) {
     console.error("Stats fetch error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json({ error: "服务器内部错误" }, { status: 500 })
   }
 }

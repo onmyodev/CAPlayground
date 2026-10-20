@@ -130,7 +130,7 @@ export function GeometryTab({
       {(disablePosX || disablePosY || disableRotX || disableRotY || disableRotZ) && (
         <Alert className="mb-3">
           <AlertDescription className="text-xs">
-            Position and rotation fields are disabled because this layer has keyframe animations enabled. The values shown update live during playback.
+            由于该图层已启用关键帧动画，位置和旋转字段已被禁用。显示的数值会在播放过程中实时更新。
           </AlertDescription>
         </Alert>
       )}
@@ -201,14 +201,14 @@ export function GeometryTab({
         {showAlignButtons && (
           <div className="space-y-1 col-span-2">
             <div className="flex items-center justify-between mb-1">
-              <Label>Align</Label>
+              <Label>对齐</Label>
               <Select value={alignTarget} onValueChange={(value: 'root' | 'parent') => setAlignTarget(value)}>
                 <SelectTrigger className="h-7 w-[110px] text-xs">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="root">To Canvas</SelectItem>
-                  <SelectItem value="parent">To Parent</SelectItem>
+                  <SelectItem value="root">到画布</SelectItem>
+                  <SelectItem value="parent">到父级</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -218,7 +218,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer('left', undefined)}
-                title="Align left"
+                title="左对齐"
                 disabled={disablePosX}
               >
                 <AlignHorizontalJustifyStart className="h-4 w-4" />
@@ -228,7 +228,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer('center', undefined)}
-                title="Align horizontal center"
+                title="水平居中对齐"
                 disabled={disablePosX}
               >
                 <AlignHorizontalJustifyCenter className="h-4 w-4" />
@@ -238,7 +238,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer('right', undefined)}
-                title="Align right"
+                title="右对齐"
                 disabled={disablePosX}
               >
                 <AlignHorizontalJustifyEnd className="h-4 w-4" />
@@ -248,7 +248,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer(undefined, 'top')}
-                title="Align top"
+                title="顶部对齐"
                 disabled={disablePosY}
               >
                 <AlignVerticalJustifyStart className="h-4 w-4" />
@@ -258,7 +258,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer(undefined, 'center')}
-                title="Align vertical center"
+                title="垂直居中对齐"
                 disabled={disablePosY}
               >
                 <AlignVerticalJustifyCenter className="h-4 w-4" />
@@ -268,7 +268,7 @@ export function GeometryTab({
                 variant="outline"
                 size="sm"
                 onClick={() => alignLayer(undefined, 'bottom')}
-                title="Align bottom"
+                title="底部对齐"
                 disabled={disablePosY}
               >
                 <AlignVerticalJustifyEnd className="h-4 w-4" />
@@ -277,7 +277,7 @@ export function GeometryTab({
           </div>
         )}
         <div className="space-y-1">
-          <Label htmlFor="w">Width</Label>
+          <Label htmlFor="w">宽度</Label>
           <Input id="w" type="number" step="0.01" value={getBuf('w', fmt2(selected.size.w))}
             disabled={selected.type === 'text' && (((selected as any).wrapped ?? 1) as number) !== 1}
             onChange={(e) => {
@@ -341,7 +341,7 @@ export function GeometryTab({
           </div>
         </div>
         <div className="space-y-1">
-          <Label htmlFor="h">Height</Label>
+          <Label htmlFor="h">高度</Label>
           <Input id="h" type="number" step="0.01" value={getBuf('h', fmt2(selected.size.h))}
             disabled={selected.type === 'text'}
             onChange={(e) => {
@@ -405,7 +405,7 @@ export function GeometryTab({
           </div>
         </div>
         <div className="space-y-1 col-span-2">
-          <Label>Scale</Label>
+          <Label>缩放</Label>
           <div className="flex items-center gap-2 w-full">
             <Slider
               value={[Math.round((typeof selected.scale === 'number' ? selected.scale : 1) * 100)]}
@@ -446,7 +446,7 @@ export function GeometryTab({
           </div>
         </div>
         <div className="space-y-1 col-span-2">
-          <Label>Rotation (deg)</Label>
+          <Label>旋转（度）</Label>
           <div className="flex justify-around items-center py-2">
             <RotationKnob
               label="X"
@@ -473,7 +473,7 @@ export function GeometryTab({
         </div>
         {selected.type !== 'emitter' && (
           <div className="space-y-1 col-span-2">
-            <Label>Anchor Point</Label>
+            <Label>锚点</Label>
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className={inState ? 'opacity-50 pointer-events-none' : ''}>
@@ -559,17 +559,17 @@ export function GeometryTab({
                       }}
                     />
                     <Label htmlFor="custom-anchor" className="text-xs text-muted-foreground cursor-pointer">
-                      Use custom anchor point
+                      使用自定义锚点
                     </Label>
                   </div>
                 </div>
               </TooltipTrigger>
-              {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+              {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
             </Tooltip>
           </div>
         )}
         <div className="space-y-1 col-span-2">
-          <Label>Flip Geometry</Label>
+          <Label>翻转几何</Label>
           <div className="flex items-center gap-2 h-8">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -579,14 +579,14 @@ export function GeometryTab({
                     onCheckedChange={(checked) => updateLayer(selected.id, { geometryFlipped: (checked ? 1 : 0) as any })} />
                 </div>
               </TooltipTrigger>
-              {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+              {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
             </Tooltip>
-            <span className="text-xs text-muted-foreground">Affects this layer's sublayers' coordinate system.</span>
+            <span className="text-xs text-muted-foreground">影响该图层子图层的坐标系。</span>
           </div>
         </div>
         {(selected.type === 'transform' || selected.type === 'replicator') &&
           <div className="space-y-1 col-span-2">
-            <Label htmlFor="perspective">Perspective</Label>
+            <Label htmlFor="perspective">透视</Label>
             <Input id="perspective" type="number" step="1" value={getBuf('perspective', fmt0(selected.perspective))}
               disabled={inState}
               onChange={(e) => {
@@ -606,7 +606,7 @@ export function GeometryTab({
                 clearBuf('perspective');
               }} />
             <p className="text-xs text-muted-foreground">
-              Controls how the layer is projected in 3D space.
+              控制图层在 3D 空间中的投影方式。
             </p>
           </div>
         }

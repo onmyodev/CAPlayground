@@ -7,7 +7,7 @@ import { Github, Users, GitCommit, AlertCircle } from "lucide-react"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "CAPlayground - Contributors",
+  title: "CAPlayground - 贡献者",
 }
 
 interface GitHubContributor {
@@ -63,17 +63,16 @@ export default async function ContributorsPage() {
                   className="bg-accent/10 text-accent border-accent/20 px-4 py-2 text-sm font-medium"
                 >
                   <Github className="w-4 h-4 mr-2" />
-                  Open Source
+                  开源
                 </Badge>
               </div>
 
               {/* Title */}
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">Contributors</h1>
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">贡献者</h1>
 
               {/* Description */}
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Meet the amazing developers who are building an amazing Core Animation editor for the community to make
-                stunning wallpapers
+                认识这些出色的开发者，他们正在为社区打造一款出色的 Core Animation 编辑器，用来制作令人惊叹的壁纸
               </p>
 
               {/* Stats */}
@@ -84,7 +83,7 @@ export default async function ContributorsPage() {
                   </div>
                   <div className="text-left">
                     <div className="text-2xl font-bold text-foreground">{totalContributors}</div>
-                    <div className="text-sm text-muted-foreground">Contributors</div>
+                    <div className="text-sm text-muted-foreground">贡献者</div>
                   </div>
                 </div>
 
@@ -94,7 +93,7 @@ export default async function ContributorsPage() {
                   </div>
                   <div className="text-left">
                     <div className="text-2xl font-bold text-foreground">{totalContributions}</div>
-                    <div className="text-sm text-muted-foreground">Contributions</div>
+                    <div className="text-sm text-muted-foreground">贡献次数</div>
                   </div>
                 </div>
               </div>
@@ -106,9 +105,9 @@ export default async function ContributorsPage() {
                 <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
                   <AlertCircle className="w-8 h-8 text-muted-foreground" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-foreground mb-2">Unable to load contributors</h3>
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-2">无法加载贡献者</h3>
                 <p className="text-muted-foreground mb-6">
-                  Couldn't fetch contributor data from GitHub. Please try again later.
+                  无法从 GitHub 获取贡献者数据，请稍后重试。
                 </p>
                 <Link
                   href="https://github.com/CAPlayground/CAPlayground/graphs/contributors"
@@ -117,7 +116,7 @@ export default async function ContributorsPage() {
                   className="inline-flex items-center space-x-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6 py-3 rounded-lg transition-colors"
                 >
                   <Github className="w-5 h-5" />
-                  <span>View on GitHub</span>
+                  <span>在 GitHub 上查看</span>
                 </Link>
               </div>
             )}
@@ -139,7 +138,7 @@ export default async function ContributorsPage() {
                         <div className="relative mx-auto w-20 h-20">
                           <img
                             src={contributor.avatar_url}
-                            alt={`${contributor.login}'s avatar`}
+                            alt={`${contributor.login} 的头像`}
                             className="w-full h-full rounded-full border-2 border-border group-hover:border-accent/50 transition-colors"
                           />
                         </div>
@@ -156,7 +155,7 @@ export default async function ContributorsPage() {
                           <div className="inline-flex items-center space-x-2 bg-muted/50 rounded-full px-3 py-1">
                             <GitCommit className="w-4 h-4 text-muted-foreground" />
                             <span className="text-sm font-medium text-muted-foreground">
-                              {contributor.contributions} contributions
+                              {contributor.contributions} 次贡献
                             </span>
                           </div>
                         </div>
@@ -169,10 +168,9 @@ export default async function ContributorsPage() {
 
             {/* Call to Action */}
             <div className="text-center mt-16 p-8 bg-muted/30 rounded-2xl">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">Want to contribute?</h2>
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">想要参与贡献？</h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                CAPlayground is open source and welcomes contributions from developers around the world. Join our
-                community and help build the future of animated wallpapers.
+                CAPlayground 是开源项目，欢迎来自世界各地的开发者参与贡献。加入我们的社区，一起构建动态壁纸的未来。
               </p>
               <Link
                 href="https://github.com/CAPlayground/CAPlayground"
@@ -181,7 +179,7 @@ export default async function ContributorsPage() {
                 className="inline-flex items-center space-x-2 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6 py-3 rounded-lg transition-colors"
               >
                 <Github className="w-5 h-5" />
-                <span>View on GitHub</span>
+                <span>在 GitHub 上查看</span>
               </Link>
             </div>
           </div>

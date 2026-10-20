@@ -8,6 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useEditor } from "@/components/editor/editor-context";
 
 import type { TabId } from "../types";
+import { getStateLabel } from "@/lib/state-labels";
 
 interface ContentTabProps extends InspectorTabProps {
   setActiveTab: (tab: TabId) => void;
@@ -33,10 +34,10 @@ export function ContentTab({
         <>
           <div className="space-y-1 col-span-2">
             <Label htmlFor="backgroundColor">
-              Background colour
+              背景颜色
               {inState && (
                 <span className="ml-1 text-[10px] text-muted-foreground font-normal">
-                  ({activeState})
+                  ({getStateLabel(activeState!)})
                 </span>
               )}
             </Label>
@@ -49,7 +50,7 @@ export function ContentTab({
             />
           </div>
           <div className="space-y-1 col-span-2">
-            <Label htmlFor="backgroundOpacity">Background opacity</Label>
+            <Label htmlFor="backgroundOpacity">背景不透明度</Label>
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className={inState ? 'opacity-50 pointer-events-none' : ''}>
@@ -97,27 +98,27 @@ export function ContentTab({
                   </div>
                 </div>
               </TooltipTrigger>
-              {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+              {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
             </Tooltip>
             <div className="col-span-2 -mt-1">
               <p className="text-[11px] text-muted-foreground">
-                Background opacity affects only this layer's background color fill (behind the content). For overall layer opacity
-                (affects images, text, and sublayers), use
+                背景不透明度只影响该图层的背景色填充（位于内容之后）。如需控制整个图层的不透明度
+                （影响图片、文本和子图层），请使用
                 {' '}
                 <button
                   type="button"
                   className="underline underline-offset-2 hover:text-foreground"
                   onClick={() => setActiveTab('compositing')}
                 >
-                  Compositing → Opacity
-                </button>.
+                  合成 → 不透明度
+                </button>。
               </p>
             </div>
           </div>
         </>
       )}
       <div className="space-y-1">
-        <Label htmlFor="borderColor">Border colour</Label>
+        <Label htmlFor="borderColor">边框颜色</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
@@ -130,11 +131,11 @@ export function ContentTab({
               />
             </div>
           </TooltipTrigger>
-          {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+          {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
         </Tooltip>
       </div>
       <div className="space-y-1">
-        <Label htmlFor="borderWidth">Border width</Label>
+        <Label htmlFor="borderWidth">边框宽度</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
@@ -161,7 +162,7 @@ export function ContentTab({
               />
             </div>
           </TooltipTrigger>
-          {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+          {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
         </Tooltip>
       </div>
     </div>

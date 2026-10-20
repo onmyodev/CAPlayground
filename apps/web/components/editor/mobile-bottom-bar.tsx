@@ -96,11 +96,11 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
       >
         {mobileView === 'canvas' ? (
           <>
-            <ChevronUp className="h-4 w-4" /> Panels
+            <ChevronUp className="h-4 w-4" /> 面板
           </>
         ) : (
           <>
-            <ChevronDown className="h-4 w-4" /> Canvas
+            <ChevronDown className="h-4 w-4" /> 画布
           </>
         )}
       </button>
@@ -110,24 +110,24 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
           <DropdownMenuTrigger asChild>
             <button
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border bg-background shadow-sm hover:bg-accent transition-colors touch-manipulation"
-              aria-label={`Active CA: ${activeCA === 'floating' ? 'Floating' : 'Background'}`}
+              aria-label={`当前 CA：${activeCA === 'floating' ? '浮动' : '背景'}`}
               aria-expanded={false}
               role="button"
             >
-              <span className="text-sm">{activeCA === 'floating' ? 'Floating' : 'Background'}</span>
+              <span className="text-sm">{activeCA === 'floating' ? '浮动' : '背景'}</span>
               <ArrowUpDown className="h-4 w-4 opacity-70" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="center" side="top" className="w-80 p-2 mb-2">
             <DropdownMenuLabel>
-              <div className="text-sm font-medium">Choose Active CA</div>
+              <div className="text-sm font-medium">选择当前 CA</div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             {activeCA === 'floating' && (
               <>
                 <div className="px-2 py-2">
                   <div className="flex items-center justify-between gap-3">
-                    <Label htmlFor="show-background-mobile" className="text-sm">Show background</Label>
+                    <Label htmlFor="show-background-mobile" className="text-sm">显示背景</Label>
                     <Switch id="show-background-mobile" checked={showBackground} onCheckedChange={setShowBackground} />
                   </div>
                 </div>
@@ -145,8 +145,8 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
                 <div className="flex items-center gap-3">
                   <LayersIcon className="h-4 w-4" />
                   <div className="flex-1 text-left">
-                    <div>Background</div>
-                    <div className="text-xs text-muted-foreground">Appears behind the clock.</div>
+                    <div>背景</div>
+                    <div className="text-xs text-muted-foreground">显示在时钟后面。</div>
                   </div>
                   {activeCA==='background' && <Check className="h-4 w-4" />}
                 </div>
@@ -161,8 +161,8 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
                 <div className="flex items-center gap-3">
                   <LayersIcon className="h-4 w-4" />
                   <div className="flex-1 text-left">
-                    <div>Floating</div>
-                    <div className="text-xs text-muted-foreground">Appears over the clock.</div>
+                    <div>浮动</div>
+                    <div className="text-xs text-muted-foreground">显示在时钟上方。</div>
                   </div>
                   {activeCA==='floating' && <Check className="h-4 w-4" />}
                 </div>
@@ -177,7 +177,7 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border bg-background shadow-sm cursor-default opacity-60"
           disabled
         >
-          <span className="text-sm">Wallpaper</span>
+          <span className="text-sm">壁纸</span>
         </button>
       )}
 
@@ -186,22 +186,22 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
           <DropdownMenuTrigger asChild>
             <button
               className="inline-flex items-center justify-center w-10 h-10 rounded-lg border bg-background shadow-sm hover:bg-accent transition-colors touch-manipulation"
-              aria-label="Add Layer"
+              aria-label="添加图层"
             >
               <Plus className="h-5 w-5" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="center" side="top" className="mb-2">
-            <DropdownMenuItem onSelect={() => addTextLayer()}>Text Layer</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => addShapeLayer("rect")}>Basic Layer</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => addGradientLayer()}>Gradient Layer</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => fileInputRef.current?.click()}>Image Layer…</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => addTextLayer()}>文本图层</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => addShapeLayer("rect")}>基础图层</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => addGradientLayer()}>渐变图层</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => fileInputRef.current?.click()}>图片图层…</DropdownMenuItem>
             <DropdownMenuItem onSelect={() => {
                 setTimeout(() => setVideoLayerIsOpen(true), 0);
-              }}>Video Layer…</DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => addEmitterLayer()}>Emitter Layer</DropdownMenuItem>
+              }}>视频图层…</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => addEmitterLayer()}>发射器图层</DropdownMenuItem>
             {isGyro && (
-              <DropdownMenuItem onSelect={() => addTransformLayer()}>Transform Layer</DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => addTransformLayer()}>变换图层</DropdownMenuItem>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -211,7 +211,7 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
           <DropdownMenuTrigger asChild>
             <button
               className="inline-flex items-center justify-center w-10 h-10 rounded-lg border bg-background shadow-sm hover:bg-accent transition-colors touch-manipulation"
-              aria-label="States"
+              aria-label="状态"
             >
               {statesOpen ? <X className="h-5 w-5" /> : <CircleDot className="h-5 w-5" />}
             </button>
@@ -222,7 +222,7 @@ export function MobileBottomBar({ mobileView, setMobileView }: MobileBottomBarPr
             className="w-48 mb-2"
             onEscapeKeyDown={() => setStatesOpen(false)}
           >
-            <DropdownMenuLabel className="text-xs font-medium">States</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-xs font-medium">状态</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onSelect={(e) => {

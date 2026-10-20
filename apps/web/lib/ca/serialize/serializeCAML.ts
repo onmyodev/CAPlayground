@@ -240,8 +240,6 @@ export function serializeCAML(
   ║                                                               ║
   ║      Create beautiful Core Animation wallpapers for iOS       ║
   ║                                                               ║
-  ║          Website: https://caplayground.vercel.app             ║
-  ║                                                               ║
   ╚═══════════════════════════════════════════════════════════════╝
 -->`;
   return '<?xml version="1.0" encoding="UTF-8"?>\n' + asciiArt + '\n' + formatted;

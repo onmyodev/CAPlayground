@@ -95,7 +95,7 @@ export function FeaturedWallpapers() {
                     muted
                     loop
                     playsInline
-                    aria-label={`Featured wallpaper ${idx + 1}`}
+                    aria-label={`精选壁纸 ${idx + 1}`}
                   />
                 </div>
               ))}

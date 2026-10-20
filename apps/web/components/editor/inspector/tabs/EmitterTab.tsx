@@ -91,7 +91,7 @@ export function EmitterTab({
         />
       </div>
       <div className="space-y-1">
-        <Label htmlFor="emitterSize-w" className="text-xs">Width</Label>
+        <Label htmlFor="emitterSize-w" className="text-xs">宽度</Label>
         <Input
           id="emitterSize-w"
           type="number"
@@ -114,7 +114,7 @@ export function EmitterTab({
         />
       </div>
       <div className="space-y-1">
-        <Label htmlFor="emitterSize-h" className="text-xs">Height</Label>
+        <Label htmlFor="emitterSize-h" className="text-xs">高度</Label>
         <Input
           id="emitterSize-h"
           type="number"
@@ -137,7 +137,7 @@ export function EmitterTab({
         />
       </div>
       <div className="space-y-1 col-span-2">
-        <Label>Render Mode</Label>
+        <Label>渲染模式</Label>
         <Select
           value={((selected as any)?.renderMode ?? 'unordered') as any}
           onValueChange={(v) => {
@@ -148,16 +148,16 @@ export function EmitterTab({
           }}
         >
           <SelectTrigger className="h-8 text-xs w-full">
-            <SelectValue placeholder="Select render mode" />
+            <SelectValue placeholder="选择渲染模式" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="unordered">unordered</SelectItem>
-            <SelectItem value="additive">additive</SelectItem>
+            <SelectItem value="unordered">无序</SelectItem>
+            <SelectItem value="additive">叠加</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div className="space-y-1">
-        <Label>Shape</Label>
+        <Label>形状</Label>
         <Select
           value={((selected as any)?.emitterShape ?? 'point') as any}
           onValueChange={(v) => {
@@ -168,17 +168,17 @@ export function EmitterTab({
           }}
         >
           <SelectTrigger className="h-8 text-xs w-full">
-            <SelectValue placeholder="Select emitter shape" />
+            <SelectValue placeholder="选择发射器形状" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="point">point</SelectItem>
-            <SelectItem value="line">line</SelectItem>
-            <SelectItem value="rectangle">rectangle</SelectItem>
+            <SelectItem value="point">点</SelectItem>
+            <SelectItem value="line">线</SelectItem>
+            <SelectItem value="rectangle">矩形</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div className="space-y-1">
-        <Label>Mode</Label>
+        <Label>模式</Label>
         <Select
           value={((selected as any)?.emitterMode ?? 'volume') as any}
           onValueChange={(v) => {
@@ -188,18 +188,18 @@ export function EmitterTab({
           }}
         >
           <SelectTrigger className="h-8 text-xs w-full">
-            <SelectValue placeholder="Select emitter mode" />
+            <SelectValue placeholder="选择发射器模式" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="volume">volume</SelectItem>
-            <SelectItem value="outline">outline</SelectItem>
-            <SelectItem value="surface">surface</SelectItem>
+            <SelectItem value="volume">体积</SelectItem>
+            <SelectItem value="outline">轮廓</SelectItem>
+            <SelectItem value="surface">表面</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <SliderInput
         className="col-span-2"
-        label="Speed"
+        label="速度"
         value={round2(selected.speed ?? 1)}
         bufferKey="speed"
         getBuf={getBuf}
@@ -221,7 +221,7 @@ export function EmitterTab({
       />
       <div className="col-span-2">
         <div className="flex items-center justify-between">
-          <Label>Cells</Label>
+          <Label>单元</Label>
           <Button
             type="button"
             variant="secondary"
@@ -231,7 +231,7 @@ export function EmitterTab({
               fileInputRef.current?.click();
             }}
           >
-            + Add Cell
+            + 添加单元
           </Button>
         </div>
         <Accordion
@@ -246,14 +246,14 @@ export function EmitterTab({
                     cellSrc={cell.src}
                     size={20}
                   />
-                  Cell {i + 1}
+                  单元 {i + 1}
                 </div>
               </AccordionTrigger>
               <AccordionContent>
                 <div className="grid grid-cols-6 gap-y-3 gap-x-1.5 items-end" key={i}>
                   <SliderInput
                     className="col-span-3"
-                    label="Contents Scale"
+                    label="内容缩放"
                     value={cell.contentsScale}
                     bufferKey={'emitterCells[' + i + '].contentsScale'}
                     getBuf={getBuf}
@@ -280,10 +280,10 @@ export function EmitterTab({
                     disabled={inState}
                     onClick={() => handleChangeImageClick(i)}
                   >
-                    Change Image
+                    更换图片
                   </Button>
                   <div className="col-span-3 space-y-1">
-                    <Label>Birth Rate</Label>
+                    <Label>出生率</Label>
                     <Input
                       type="number"
                       step="1"
@@ -312,7 +312,7 @@ export function EmitterTab({
                     />
                   </div>
                   <div className="col-span-3 space-y-1">
-                    <Label>Lifetime</Label>
+                    <Label>生命周期</Label>
                     <Input
                       type="number"
                       step="1"
@@ -341,7 +341,7 @@ export function EmitterTab({
                     />
                   </div>
                   <div className="col-span-6 space-y-1">
-                    <Label>Velocity</Label>
+                    <Label>速度</Label>
                     <Input
                       type="number"
                       step="1"
@@ -370,11 +370,11 @@ export function EmitterTab({
                     />
                   </div>
                   <div className="col-span-3 space-y-1 grid grid-cols-2">
-                    <Label className="col-span-2">Emission</Label>
+                    <Label className="col-span-2">发射</Label>
                     <div className="space-y-1">
                       <div className="flex justify-center py-1">
                         <RotationKnob
-                          label="Range"
+                          label="范围"
                           value={Number(fmt0(cell.emissionRange)) || 0}
                           disabled={inState}
                           onChange={(v) => {
@@ -394,7 +394,7 @@ export function EmitterTab({
                     <div className="space-y-1">
                       <div className="flex justify-center py-1">
                         <RotationKnob
-                          label="Angle"
+                          label="角度"
                           value={Number(fmt0(cell.emissionLongitude)) || 0}
                           disabled={inState}
                           onChange={(v) => {
@@ -413,11 +413,11 @@ export function EmitterTab({
                     </div>
                   </div>
                   <div className="col-span-3 space-y-1 grid grid-cols-2">
-                    <Label className="col-span-2">Spin</Label>
+                    <Label className="col-span-2">自转</Label>
                     <div className="space-y-1">
                       <div className="flex justify-center py-1">
                         <RotationKnob
-                          label="Spin"
+                          label="自转"
                           value={Number(fmt0(cell.spin)) || 0}
                           disabled={inState}
                           onChange={(v) => {
@@ -437,7 +437,7 @@ export function EmitterTab({
                     <div className="space-y-1">
                       <div className="flex justify-center py-1">
                         <RotationKnob
-                          label="Range"
+                          label="范围"
                           value={Number(fmt2(cell.spinRange)) || 0}
                           disabled={inState}
                           onChange={(v) => {
@@ -457,7 +457,7 @@ export function EmitterTab({
                   </div>
                   <SliderInput
                     className="col-span-6"
-                    label="Scale"
+                    label="缩放"
                     value={cell.scale}
                     bufferKey={'emitterCells[' + i + '].scale'}
                     getBuf={getBuf}
@@ -477,7 +477,7 @@ export function EmitterTab({
                   />
                   <SliderInput
                     className="col-span-3"
-                    label="Scale Range"
+                    label="缩放范围"
                     value={cell.scaleRange}
                     bufferKey={'emitterCells[' + i + '].scaleRange'}
                     getBuf={getBuf}
@@ -497,7 +497,7 @@ export function EmitterTab({
                   />
                   <SliderInput
                     className="col-span-3"
-                    label="Scale Speed"
+                    label="缩放速度"
                     value={cell.scaleSpeed}
                     bufferKey={'emitterCells[' + i + '].scaleSpeed'}
                     getBuf={getBuf}
@@ -517,7 +517,7 @@ export function EmitterTab({
                   />
                   <SliderInput
                     className="col-span-6"
-                    label="Alpha"
+                    label="不透明度"
                     value={cell.alpha}
                     bufferKey={'emitterCells[' + i + '].alpha'}
                     getBuf={getBuf}
@@ -540,7 +540,7 @@ export function EmitterTab({
                   />
                   <SliderInput
                     className="col-span-3"
-                    label="Alpha Range"
+                    label="不透明度范围"
                     value={cell.alphaRange}
                     bufferKey={'emitterCells[' + i + '].alphaRange'}
                     getBuf={getBuf}
@@ -564,7 +564,7 @@ export function EmitterTab({
                   />
                   <SliderInput
                     className="col-span-3"
-                    label="Alpha Speed"
+                    label="不透明度速度"
                     value={cell.alphaSpeed}
                     bufferKey={'emitterCells[' + i + '].alphaSpeed'}
                     getBuf={getBuf}
@@ -587,7 +587,7 @@ export function EmitterTab({
                     }}
                   />
                   <div className="col-span-3 space-y-1">
-                    <Label>X Acceleration</Label>
+                    <Label>X 加速度</Label>
                     <Input
                       type="number"
                       step="1"
@@ -616,7 +616,7 @@ export function EmitterTab({
                     />
                   </div>
                   <div className="col-span-3 space-y-1">
-                    <Label>Y Acceleration</Label>
+                    <Label>Y 加速度</Label>
                     <Input
                       type="number"
                       step="1"
@@ -648,11 +648,11 @@ export function EmitterTab({
                     <Accordion type="single" collapsible>
                       <AccordionItem value="advanced-color">
                         <AccordionTrigger className="text-sm text-muted-foreground hover:text-foreground">
-                          Advanced Color Controls
+                          高级颜色控制
                         </AccordionTrigger>
                         <AccordionContent className="grid grid-cols-6 gap-3">
                           <div className="col-span-6 space-y-1">
-                            <Label>Color</Label>
+                            <Label>颜色</Label>
                             <Input
                               type="color"
                               value={cell.color}
@@ -666,7 +666,7 @@ export function EmitterTab({
                           </div>
                           <SliderInput
                             className="col-span-3"
-                            label="Red Range"
+                            label="红色范围"
                             value={cell.redRange}
                             bufferKey={'emitterCells[' + i + '].redRange'}
                             getBuf={getBuf}
@@ -690,7 +690,7 @@ export function EmitterTab({
                           />
                           <SliderInput
                             className="col-span-3"
-                            label="Speed"
+                            label="速度"
                             value={cell.redSpeed}
                             bufferKey={'emitterCells[' + i + '].redSpeed'}
                             getBuf={getBuf}
@@ -714,7 +714,7 @@ export function EmitterTab({
                           />
                           <SliderInput
                             className="col-span-3"
-                            label="Green Range"
+                            label="绿色范围"
                             value={cell.greenRange}
                             bufferKey={'emitterCells[' + i + '].greenRange'}
                             getBuf={getBuf}
@@ -738,7 +738,7 @@ export function EmitterTab({
                           />
                           <SliderInput
                             className="col-span-3"
-                            label="Speed"
+                            label="速度"
                             value={cell.greenSpeed}
                             bufferKey={'emitterCells[' + i + '].greenSpeed'}
                             getBuf={getBuf}
@@ -762,7 +762,7 @@ export function EmitterTab({
                           />
                           <SliderInput
                             className="col-span-3"
-                            label="Blue Range"
+                            label="蓝色范围"
                             value={cell.blueRange}
                             bufferKey={'emitterCells[' + i + '].blueRange'}
                             getBuf={getBuf}
@@ -786,7 +786,7 @@ export function EmitterTab({
                           />
                           <SliderInput
                             className="col-span-3"
-                            label="Speed"
+                            label="速度"
                             value={cell.blueSpeed}
                             bufferKey={'emitterCells[' + i + '].blueSpeed'}
                             getBuf={getBuf}
@@ -819,7 +819,7 @@ export function EmitterTab({
                     onClick={() => removeEmitterCell(selected.id, i)}
                     className="col-span-6 justify-self-center"
                   >
-                    Remove
+                    移除
                   </Button>
                 </div>
               </AccordionContent>

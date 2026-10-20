@@ -42,7 +42,7 @@ export function FiltersTab({
         onValueChange={addFilter}
       >
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Add filter" />
+          <SelectValue placeholder="添加滤镜" />
         </SelectTrigger>
         <SelectContent>
           {Object.keys(supportedFilters).map((filter) => (
@@ -97,7 +97,7 @@ const FilterItem = ({ filter, selected }: { filter: Filter; selected: AnyLayer }
         <Checkbox
           checked={filter.enabled}
           onCheckedChange={onEnableFilter}
-          title="Enable filter"
+          title="启用滤镜"
         />
         <Label htmlFor="blur" className="text-xs">
           {filter.name}
@@ -107,8 +107,8 @@ const FilterItem = ({ filter, selected }: { filter: Filter; selected: AnyLayer }
           size="icon"
           variant="destructive"
           onClick={onRemoveFilter}
-          aria-label="Remove filter"
-          title="Remove filter"
+          aria-label="移除滤镜"
+          title="移除滤镜"
         >
           <XIcon className="h-4 w-4" />
         </Button>

@@ -65,7 +65,7 @@ export function AnimationsTab({
         onValueChange={addAnimation}
       >
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Add animation" />
+          <SelectValue placeholder="添加动画" />
         </SelectTrigger>
         <SelectContent>
           {[...supportedAnimations, ...(selected?.type === 'gradient' ? gradientOnlyAnimations : [])]
@@ -149,7 +149,7 @@ const AnimationItem = ({
         <Checkbox
           checked={enabled}
           onCheckedChange={(checked) => updateAnimation({ enabled: !!checked })}
-          title="Enable animation"
+          title="启用动画"
         />
         <AccordionTrigger className="w-full">
           {keyPath}
@@ -159,7 +159,7 @@ const AnimationItem = ({
         <div className={`space-y-3 ${enabled ? '' : 'opacity-50'}`}>
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1 col-span-1">
-              <Label htmlFor="anim-duration">Duration (s)</Label>
+              <Label htmlFor="anim-duration">时长（s）</Label>
               <Input
                 id="anim-duration"
                 type="number"
@@ -179,19 +179,19 @@ const AnimationItem = ({
               />
             </div>
             <div className="space-y-1 col-span-1">
-              <Label>Loop</Label>
+              <Label>循环</Label>
               <div className="flex items-center gap-2 h-8">
                 <Switch
                   checked={(infinite ?? 1) === 1}
                   onCheckedChange={(checked) => updateAnimation({ infinite: checked ? 1 : 0 })}
                   disabled={!enabled}
                 />
-                <span className="text-xs text-muted-foreground">Infinite</span>
+                <span className="text-xs text-muted-foreground">无限</span>
               </div>
             </div>
             {((infinite ?? 1) !== 1) && (
               <div className="space-y-1 col-span-2">
-                <Label htmlFor="anim-repeat">Repeat for (s)</Label>
+                <Label htmlFor="anim-repeat">重复时长（s）</Label>
                 <Input
                   id="anim-repeat"
                   type="number"
@@ -221,13 +221,13 @@ const AnimationItem = ({
               disabled={!enabled}
             >
               {showAdvanced ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
-              Advanced options
+              高级选项
             </button>
 
             {showAdvanced && (
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <div className="space-y-1 col-span-1">
-                  <Label htmlFor="anim-speed">Speed</Label>
+                  <Label htmlFor="anim-speed">速度</Label>
                   <Input
                     id="anim-speed"
                     type="number"
@@ -247,7 +247,7 @@ const AnimationItem = ({
                   />
                 </div>
                 <div className="space-y-1 col-span-1">
-                  <Label>Autoreverse</Label>
+                  <Label>自动反向</Label>
                   <div className="flex items-center gap-2 h-8">
                     <Switch
                       checked={(autoreverses ?? 0) === 1}
@@ -257,7 +257,7 @@ const AnimationItem = ({
                   </div>
                 </div>
                 <div className="space-y-1 col-span-1">
-                  <Label>Calculation Mode</Label>
+                  <Label>计算模式</Label>
                   <Select
                     value={calculationMode}
                     onValueChange={(value: CalculationMode) => updateAnimation({ calculationMode: value })}
@@ -267,13 +267,13 @@ const AnimationItem = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="linear">Linear</SelectItem>
-                      <SelectItem value="discrete">Discrete</SelectItem>
+                      <SelectItem value="linear">线性</SelectItem>
+                      <SelectItem value="discrete">离散</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="flex flex-col justify-end space-y-1 col-span-1">
-                  <Label>Timing Function</Label>
+                  <Label>缓动函数</Label>
                   <Select
                     value={timingFunction}
                     onValueChange={(value: TimingFunction) => updateAnimation({ timingFunction: value })}
@@ -283,15 +283,15 @@ const AnimationItem = ({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="linear">Linear</SelectItem>
-                      <SelectItem value="easeIn">Ease In</SelectItem>
-                      <SelectItem value="easeOut">Ease Out</SelectItem>
-                      <SelectItem value="easeInEaseOut">Ease In-Out</SelectItem>
+                      <SelectItem value="linear">线性</SelectItem>
+                      <SelectItem value="easeIn">缓入</SelectItem>
+                      <SelectItem value="easeOut">缓出</SelectItem>
+                      <SelectItem value="easeInEaseOut">缓入缓出</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-1 col-span-2">
-                  <Label>Custom Key Times</Label>
+                  <Label>自定义关键帧时间</Label>
                   <div className="flex items-center gap-2 h-8">
                     <Switch
                       checked={useCustomKeyTimes}
@@ -309,7 +309,7 @@ const AnimationItem = ({
                       }}
                       disabled={!enabled}
                     />
-                    <span className="text-xs text-muted-foreground">Custom timing per keyframe</span>
+                    <span className="text-xs text-muted-foreground">为每个关键帧自定义时间</span>
                   </div>
                 </div>
               </div>
@@ -319,7 +319,7 @@ const AnimationItem = ({
 
         <div className="space-y-2 mb-2 mt-3">
           <div className="flex items-center justify-between gap-2">
-            <Label className="text-sm font-medium">Keyframes</Label>
+            <Label className="text-sm font-medium">关键帧</Label>
             <div className="flex gap-1">
               <Button
                 type="button"
@@ -363,7 +363,7 @@ const AnimationItem = ({
                 disabled={!enabled}
                 className="h-7 px-2 text-xs"
               >
-                + Add
+                + 添加
               </Button>
               {keyPath !== 'backgroundColor' && (
                 <BulkAnimationInput
@@ -384,7 +384,7 @@ const AnimationItem = ({
                     <th className="pl-2 py-1.5 text-left font-medium text-muted-foreground w-6">#</th>
                     {(() => {
                       if (keyPath === 'colors') {
-                        return <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">Color Stops</th>;
+                        return <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">颜色节点</th>;
                       }
                       const isTwoValue = keyPath === 'position' || keyPath === 'bounds';
                       const isPosition = keyPath === 'position';
@@ -393,18 +393,18 @@ const AnimationItem = ({
                       if (isTwoValue) {
                         return (
                           <>
-                            <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">{isPosition ? 'X' : 'W'}</th>
-                            <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">{isPosition ? 'Y' : 'H'}</th>
+                            <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">{isPosition ? 'X' : '宽'}</th>
+                            <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">{isPosition ? 'Y' : '高'}</th>
                           </>
                         );
                       }
                       return (
                         <th className="px-2 py-1.5 text-left font-medium text-muted-foreground">
-                          {keyPath === 'position.x' ? 'X' : keyPath === 'position.y' ? 'Y' : isOpacity ? 'Opacity' : isBackgroundColor ? 'Color' : 'Deg'}
+                          {keyPath === 'position.x' ? 'X' : keyPath === 'position.y' ? 'Y' : isOpacity ? '不透明度' : isBackgroundColor ? '颜色' : '角度'}
                         </th>
                       );
                     })()}
-                    {useCustomKeyTimes && <th className="px-2 py-1.5 text-left font-medium text-muted-foreground w-14">Time</th>}
+                    {useCustomKeyTimes && <th className="px-2 py-1.5 text-left font-medium text-muted-foreground w-14">时间</th>}
                     <th className="px-1 py-1.5 w-6"></th>
                   </tr>
                 </thead>
@@ -549,7 +549,7 @@ const AnimationItem = ({
                               <PopoverContent className="w-52 p-3" align="center" side="left">
                                 <div className="space-y-3">
                                   <div className="flex items-center justify-between">
-                                    <Label className="text-xs font-medium">Keyframe Time</Label>
+                                    <Label className="text-xs font-medium">关键帧时间</Label>
                                     <div className="flex items-center gap-0.5">
                                       <input
                                         type="number"
@@ -590,7 +590,7 @@ const AnimationItem = ({
                                     className="w-full"
                                   />
                                   <p className="text-[10px] text-muted-foreground">
-                                    Range: {minTime}% – {maxTime}%
+                                    范围：{minTime}% – {maxTime}%
                                   </p>
                                 </div>
                               </PopoverContent>
@@ -626,7 +626,7 @@ const AnimationItem = ({
               </table>
             </div>
           ) : (
-            <div className="text-xs text-muted-foreground py-2">No keyframes yet. Click "+ Add" to create one.</div>
+            <div className="text-xs text-muted-foreground py-2">暂无关键帧。点击“+ 添加”创建一个。</div>
           )}
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -665,7 +665,7 @@ const AnimationItem = ({
               className="gap-2"
             >
               <Download className="w-4 h-4" />
-              Export
+              导出
             </Button>
           )}
           <Button
@@ -678,7 +678,7 @@ const AnimationItem = ({
               updateLayer(selectedBase?.id, { animations });
             }}
           >
-            Remove
+            移除
           </Button>
         </div>
       </AccordionContent>

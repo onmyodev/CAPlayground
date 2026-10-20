@@ -112,8 +112,8 @@ export const LockScreenClock = ({ homeBarTranslateY }: { homeBarTranslateY: numb
   const { minutes, displayHours, now } = getTime();
   const [clockDepthEffect] = useLocalStorage<boolean>("caplay_preview_clock_depth", false);
 
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
 
   const dayName = days[now.getDay()];
   const monthName = months[now.getMonth()];
@@ -125,7 +125,7 @@ export const LockScreenClock = ({ homeBarTranslateY }: { homeBarTranslateY: numb
       style={{ transform: `translateY(${clockDepthEffect ? homeBarTranslateY : 0}px)` }}
     >
       <div className="text-lg font-medium tracking-wide">
-        {dayName} {date} {monthName}
+        {monthName}{date}日 {dayName}
       </div>
       <div className="text-[120px] font-bold leading-[100px] tracking-tight">
         {displayHours}:{minutes}

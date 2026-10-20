@@ -8,8 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Link from "next/link"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { useSearchParams, useRouter } from "next/navigation"
-import { Upload, Edit, Download, X, Copy, Check, Youtube } from "lucide-react"
-import { SubmitWallpaperDialog } from "./SubmitWallpaperDialog"
+import { Edit, Download, X, Copy, Check, Youtube } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -17,7 +16,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
-import { getSupabaseBrowserClient } from "@/lib/supabase"
 import type { AnyLayer, CAAsset, CAProjectBundle } from "@/lib/ca/types"
 import { ensureUniqueProjectName, createProject, listProjects, putBlobFile, putTextFile } from "@/lib/storage"
 import { useToast } from "@/hooks/use-toast"
@@ -45,15 +43,10 @@ function isVideo(src: string) {
 
 export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
   console.log('WallpapersGrid loaded with data:', data.wallpapers.map(w => ({ name: w.name, id: w.id })))
-  const supabase = getSupabaseBrowserClient()
   const searchParams = useSearchParams()
   const router = useRouter()
   const { toast } = useToast()
   const [q, setQ] = useState("")
-  const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false)
-  const [username, setUsername] = useState<string>("")
-  const [displayName, setDisplayName] = useState<string>("")
-  const [isSignedIn, setIsSignedIn] = useState(false)
   const [importingWallpaper, setImportingWallpaper] = useState<string | null>(null)
   const [downloadStats, setDownloadStats] = useState<Record<string, number>>({})
   const [sortBy, setSortBy] = useState<'default' | 'newest' | 'downloads' | 'least-downloads'>('downloads')
@@ -89,14 +82,14 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
       const fileUrl = `${data.base_url}${item.file}`
 
       const response = await fetch(fileUrl)
-      if (!response.ok) throw new Error('Failed to download wallpaper')
+      if (!response.ok) throw new Error('下载壁纸失败')
       const blob = await response.blob()
 
       const { unpackTendies } = await import('@/lib/ca/ca-file')
       const tendies = await unpackTendies(blob)
 
       const id = Date.now().toString()
-      const name = await ensureUniqueProjectName(item.name || "Imported Wallpaper")
+      const name = await ensureUniqueProjectName(item.name || "导入的壁纸")
       const width = Math.round(tendies.project.width)
       const height = Math.round(tendies.project.height)
       await createProject({
@@ -200,7 +193,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
       router.push(`/editor/${id}`)
     } catch (err) {
       console.error('Failed to open wallpaper in editor', err)
-      alert(`Failed to open wallpaper in editor: ${err instanceof Error ? err.message : 'Unknown error'}`)
+      alert(`在编辑器中打开壁纸失败：${err instanceof Error ? err.message : '未知错误'}`)
     } finally {
       setImportingWallpaper(null)
     }
@@ -211,15 +204,15 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
     navigator.clipboard.writeText(url).then(() => {
       setCopiedWallpaperId(item.id)
       toast({
-        title: "Link copied!",
-        description: "Wallpaper link has been copied to clipboard.",
+        title: "链接已复制！",
+        description: "壁纸链接已复制到剪贴板。",
       })
       setTimeout(() => setCopiedWallpaperId(null), 2000)
     }).catch((err) => {
       console.error('Failed to copy link:', err)
       toast({
-        title: "Failed to copy",
-        description: "Could not copy link to clipboard.",
+        title: "复制失败",
+        description: "无法将链接复制到剪贴板。",
         variant: "destructive",
       })
     })
@@ -269,35 +262,6 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
   }, [])
 
   useEffect(() => {
-    let mounted = true
-    async function loadUser() {
-      try {
-        const { data } = await supabase.auth.getUser()
-        const user = data.user
-        if (!user) {
-          if (mounted) setIsSignedIn(false)
-          return
-        }
-
-        if (mounted) setIsSignedIn(true)
-
-        const meta: any = user.user_metadata || {}
-        const name = meta.full_name || meta.name || meta.username || user.email || ""
-        if (mounted) setDisplayName(name as string)
-
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("username")
-          .eq("id", user.id)
-          .maybeSingle()
-        if (mounted && profile?.username) setUsername(profile.username as string)
-      } catch { }
-    }
-    loadUser()
-    return () => { mounted = false }
-  }, [supabase])
-
-  useEffect(() => {
     const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
     setIsIOS(ios)
   }, [])
@@ -335,17 +299,11 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
   return (
     <div className="space-y-6">
       <div className="max-w-xl mx-auto w-full space-y-3">
-        <div className="flex justify-center">
-          <Button onClick={() => setIsSubmitDialogOpen(true)} className="gap-2">
-            <Upload className="h-4 w-4" />
-            Submit Wallpaper
-          </Button>
-        </div>
         <div className="flex gap-3">
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search wallpapers by name, creator, or description..."
+            placeholder="按名称、作者或描述搜索壁纸……"
             className="flex-1"
           />
           <Select
@@ -353,13 +311,13 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
             onValueChange={(value: 'default' | 'newest' | 'downloads' | 'least-downloads') => setSortBy(value)}
           >
             <SelectTrigger className="w-[180px] bg-background border shadow-sm">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder="排序方式" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="default">Oldest to Newest</SelectItem>
-              <SelectItem value="newest">Newest to Oldest</SelectItem>
-              <SelectItem value="downloads">Most Downloads</SelectItem>
-              <SelectItem value="least-downloads">Least Downloads</SelectItem>
+              <SelectItem value="default">从旧到新</SelectItem>
+              <SelectItem value="newest">从新到旧</SelectItem>
+              <SelectItem value="downloads">下载最多</SelectItem>
+              <SelectItem value="least-downloads">下载最少</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -391,23 +349,23 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                         muted
                         loop
                         playsInline
-                        aria-label={`${item.name} preview`}
+                        aria-label={`${item.name} 预览`}
                       />
                     ) : (
-                      <img src={previewUrl} alt={`${item.name} preview`} className="w-full h-full object-contain" />
+                      <img src={previewUrl} alt={`${item.name} 预览`} className="w-full h-full object-contain" />
                     )}
                   </AspectRatio>
                 </div>
 
                 <h3 className="font-medium line-clamp-1 mb-1">{item.name}</h3>
                 <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
-                  by {item.creator} (submitted on {item.from})
+                  作者 {item.creator}（提交于 {item.from}）
                 </p>
                 {downloadStats[String(item.id)] > 0 && (
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
                     <Download className="h-3.5 w-3.5" />
                     <span>{downloadStats[String(item.id)]}</span>
-                    <span>{downloadStats[String(item.id)] === 1 ? 'Download' : 'Downloads'}</span>
+                    <span>次下载</span>
                   </div>
                 )}
                 <p className="text-sm text-muted-foreground line-clamp-3 mb-4">{item.description}</p>
@@ -421,7 +379,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                     }}
                   >
                     <Download className="h-4 w-4 mr-2" />
-                    Download .tendies
+                    下载 .tendies
                   </Button>
                   {isIOS && (
                     <Button
@@ -434,7 +392,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                     >
                       <a href={`pocketposter://download?url=${encodeURIComponent(fileUrl)}`}>
                         <Download className="h-4 w-4 mr-2" />
-                        Open in Pocket Poster
+                        在 Pocket Poster 中打开
                       </a>
                     </Button>
                   )}
@@ -448,7 +406,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                     className="w-full"
                   >
                     <Edit className="h-4 w-4 mr-2" />
-                    {importingWallpaper === item.name ? 'Opening...' : 'Open in Editor'}
+                    {importingWallpaper === item.name ? '正在打开…' : '在编辑器中打开'}
                   </Button>
                   <Button
                     variant="outline"
@@ -459,7 +417,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                     }}
                   >
                     <Youtube className="h-4 w-4 mr-2" />
-                    Watch Tutorial
+                    观看教程
                   </Button>
                 </div>
               </CardContent>
@@ -467,13 +425,6 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
           )
         })}
       </div>
-
-      <SubmitWallpaperDialog
-        open={isSubmitDialogOpen}
-        onOpenChange={setIsSubmitDialogOpen}
-        username={username || displayName || "Anonymous"}
-        isSignedIn={isSignedIn}
-      />
 
       {/* Expanded Wallpaper */}
       <Dialog open={!!expandedWallpaper} onOpenChange={(open) => {
@@ -494,7 +445,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                 <DialogHeader>
                   <DialogTitle className="text-2xl">{expandedWallpaper.name}</DialogTitle>
                   <DialogDescription className="text-base">
-                    by {expandedWallpaper.creator} (submitted on {expandedWallpaper.from})
+                    作者 {expandedWallpaper.creator}（提交于 {expandedWallpaper.from}）
                   </DialogDescription>
                 </DialogHeader>
 
@@ -510,12 +461,12 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                           muted
                           loop
                           playsInline
-                          aria-label={`${expandedWallpaper.name} preview`}
+                          aria-label={`${expandedWallpaper.name} 预览`}
                         />
                       ) : (
                         <img
                           src={previewUrl}
-                          alt={`${expandedWallpaper.name} preview`}
+                          alt={`${expandedWallpaper.name} 预览`}
                           className="w-full h-full object-contain"
                         />
                       )}
@@ -524,7 +475,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
 
                   {/* Description */}
                   <div>
-                    <h3 className="font-semibold mb-2">Description</h3>
+                    <h3 className="font-semibold mb-2">描述</h3>
                     <p className="text-sm text-muted-foreground">{expandedWallpaper.description}</p>
                   </div>
 
@@ -533,7 +484,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Download className="h-4 w-4" />
                       <span>{downloadStats[String(expandedWallpaper.id)]}</span>
-                      <span>{downloadStats[String(expandedWallpaper.id)] === 1 ? 'Download' : 'Downloads'}</span>
+                      <span>次下载</span>
                     </div>
                   )}
 
@@ -547,7 +498,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                       }}
                     >
                       <Download className="h-4 w-4 mr-2" />
-                      Download .tendies
+                      下载 .tendies
                     </Button>
                     {isIOS && (
                       <Button
@@ -559,7 +510,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                       >
                         <a href={`pocketposter://download?url=${encodeURIComponent(fileUrl)}`}>
                           <Download className="h-4 w-4 mr-2" />
-                          Open in Pocket Poster
+                          在 Pocket Poster 中打开
                         </a>
                       </Button>
                     )}
@@ -573,7 +524,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                       className="w-full"
                     >
                       <Edit className="h-4 w-4 mr-2" />
-                      {importingWallpaper === expandedWallpaper.name ? 'Opening...' : 'Open in Editor'}
+                      {importingWallpaper === expandedWallpaper.name ? '正在打开…' : '在编辑器中打开'}
                     </Button>
                     <Button
                       variant="outline"
@@ -581,7 +532,7 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                       onClick={() => window.open('https://www.youtube.com/watch?v=nSBQIwAaAEc', '_blank')}
                     >
                       <Youtube className="h-4 w-4 mr-2" />
-                      Watch Tutorial
+                      观看教程
                     </Button>
                     <Button
                       variant="secondary"
@@ -591,12 +542,12 @@ export function WallpapersGrid({ data }: { data: WallpapersResponse }) {
                       {copiedWallpaperId === expandedWallpaper.id ? (
                         <>
                           <Check className="h-4 w-4 mr-2" />
-                          Copied
+                          已复制
                         </>
                       ) : (
                         <>
                           <Copy className="h-4 w-4 mr-2" />
-                          Copy Link
+                          复制链接
                         </>
                       )}
                     </Button>

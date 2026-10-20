@@ -142,7 +142,7 @@ export default function EditorPage() {
         <BrowserWarning />
         <div
           className={cn("flex flex-col", uiDensity === "compact" && "ui-compact")}
-          style={{ height: `calc(100dvh - var(--unofficial-banner-height, 0px))` }}
+          style={{ height: "100dvh" }}
           ref={containerRef}
         >
           <MenuBar
@@ -179,11 +179,11 @@ export default function EditorPage() {
                       <button
                         className={`px-3 py-1 rounded text-sm border ${mobilePanelScreen === 'layers_states' ? 'bg-accent text-accent-foreground' : 'bg-background'}`}
                         onClick={() => setMobilePanelScreen('layers_states')}
-                      >Layers/States</button>
+                      >图层/状态</button>
                       <button
                         className={`px-3 py-1 rounded text-sm border ${mobilePanelScreen === 'inspector' ? 'bg-accent text-accent-foreground' : 'bg-background'}`}
                         onClick={() => setMobilePanelScreen('inspector')}
-                      >Inspector</button>
+                      >属性面板</button>
                     </div>
                     <div className="h-full overflow-auto">
                       {mobilePanelScreen === 'layers_states' ? (
@@ -242,7 +242,7 @@ export default function EditorPage() {
                             window.addEventListener('mousemove', onMove);
                             window.addEventListener('mouseup', onUp);
                           }}
-                          aria-label="Resize layers/states panels"
+                          aria-label="调整图层/状态面板大小"
                         />
                         <div className="min-h-[120px] overflow-auto" style={{ flex: `0 0 ${statesHeight}px` }}>
                           <StatesPanel />
@@ -267,7 +267,7 @@ export default function EditorPage() {
                         window.addEventListener('mousemove', onMove);
                         window.addEventListener('mouseup', onUp);
                       }}
-                      aria-label="Resize left column"
+                      aria-label="调整左栏宽度"
                     />
                   </>
                 )}
@@ -296,7 +296,7 @@ export default function EditorPage() {
                         window.addEventListener('mousemove', onMove);
                         window.addEventListener('mouseup', onUp);
                       }}
-                      aria-label="Resize right column"
+                      aria-label="调整右栏宽度"
                     />
 
                     <div className="min-h-0 flex-shrink-0" style={{ width: rightWidth }}>

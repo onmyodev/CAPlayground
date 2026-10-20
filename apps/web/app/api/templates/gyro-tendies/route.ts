@@ -21,7 +21,7 @@ export async function GET(_request: NextRequest) {
     console.error('Error serving gyro-tendies template:', error);
 
     return NextResponse.json(
-      { error: 'Failed to load gyro-tendies template', details: error instanceof Error ? (error as Error).message : 'Unknown error' },
+      { error: '加载 gyro-tendies 模板失败', details: error instanceof Error ? (error as Error).message : '未知错误' },
       { status: 500 }
     );
   }

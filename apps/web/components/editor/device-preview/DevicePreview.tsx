@@ -512,7 +512,7 @@ export default function DevicePreview({
         />
         <div className="absolute w-max bottom-[101%] left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 text-xs">
           <div className="flex shrink-0 items-center gap-2 rounded-md bg-white/80 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 px-2 py-1">
-            <Label>Depth Effect</Label>
+            <Label>景深效果</Label>
             <Switch
               checked={clockDepthEffect}
               onCheckedChange={setClockDepthEffect}
@@ -521,7 +521,7 @@ export default function DevicePreview({
           </div>
           {hasAppearanceSplit && (
             <div className="flex items-center gap-2 rounded-md bg-white/80 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 px-2 py-1">
-              <Label>Light</Label>
+              <Label>浅色</Label>
               <Sun className="h-3 w-3" />
               <Switch
                 checked={theme === 'Dark'}
@@ -529,7 +529,7 @@ export default function DevicePreview({
                 disabled={isAnimatingDragCancel || isAnimatingDragComplete || isAnimatingToSleep || isAnimatingFromSleep}
               />
               <Moon className="h-3 w-3" />
-              <Label>Dark</Label>
+              <Label>深色</Label>
             </div>
           )}
         </div>

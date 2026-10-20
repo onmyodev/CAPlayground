@@ -152,25 +152,25 @@ export default function Timeline() {
   return (
     <div className="absolute left-1/2 -translate-x-1/2 bottom-14 w-[100%] p-1 overflow-hidden rounded-md border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/70 shadow-sm">
       <div className="flex items-center justify-between p-1">
-        <div className="text-sm font-semibold">Timeline</div>
+        <div className="text-sm font-semibold">时间线</div>
         <div className="flex items-center gap-2">
           <Button
             onClick={zoomOut}
             className="h-6 w-6 bg-white/80 dark:bg-gray-900/70 hover:dark:bg-slate-700"
             variant="outline"
             size="icon"
-            aria-label="Zoom out"
+            aria-label="缩小"
             disabled={viewSeconds === 600}
           >
             <Minus className="h-4 w-4" />
           </Button>
-          <span className="text-xs">Scale</span>
+          <span className="text-xs">缩放</span>
           <Button
             onClick={zoomIn}
             className="h-6 w-6 bg-white/80 dark:bg-gray-900/70 hover:dark:bg-slate-700"
             variant="outline"
             size="icon"
-            aria-label="Zoom in"
+            aria-label="放大"
             disabled={viewSeconds === 1}
           >
             <Plus className="h-4 w-4" />
@@ -199,7 +199,7 @@ export default function Timeline() {
                 className="sticky left-0 z-30 shrink-0 flex items-center px-1 border-r border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
                 style={{ width: labelWidth }}
               >
-                <span className="text-[10px] text-gray-500">Time</span>
+                <span className="text-[10px] text-gray-500">时间</span>
               </div>
               <div
                 ref={rulerRef}

@@ -25,12 +25,12 @@ export function TextTab({
   return (
     <div className="grid grid-cols-2 gap-x-1.5 gap-y-3">
       <div className="space-y-1 col-span-2">
-        <Label htmlFor="text">Text</Label>
+        <Label htmlFor="text">文本</Label>
         <Input id="text" value={selected.text}
           onChange={(e) => updateLayer(selected.id, { text: e.target.value } as any)} />
       </div>
       <div className="space-y-1">
-        <Label htmlFor="fontSize">Font size</Label>
+        <Label htmlFor="fontSize">字号</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
@@ -43,11 +43,11 @@ export function TextTab({
           }} />
             </div>
           </TooltipTrigger>
-          {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+          {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
         </Tooltip>
       </div>
       <div className="space-y-1">
-        <Label htmlFor="color">Color</Label>
+        <Label htmlFor="color">颜色</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
@@ -56,18 +56,18 @@ export function TextTab({
           onChange={(e) => updateLayer(selected.id, { color: e.target.value } as any)} />
             </div>
           </TooltipTrigger>
-          {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+          {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
         </Tooltip>
       </div>
       <div className="space-y-1 col-span-2">
-        <Label htmlFor="fontFamily">Font</Label>
+        <Label htmlFor="fontFamily">字体</Label>
         <Select value={(selected as any).fontFamily || 'SFProText-Regular'}
           onValueChange={(v) => updateLayer(selected.id, { fontFamily: v } as any)}>
           <SelectTrigger className="h-8 text-xs w-full" id="fontFamily">
-            <SelectValue placeholder="Select font" />
+            <SelectValue placeholder="选择字体" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="SFProText-Regular">System Default (SF Pro)</SelectItem>
+            <SelectItem value="SFProText-Regular">系统默认（SF Pro）</SelectItem>
             <SelectItem value="TimesNewRomanPSMT">Times New Roman</SelectItem>
             <SelectItem value="Copperplate">Copperplate</SelectItem>
             <SelectItem value="CourierNewPSMT">Courier New</SelectItem>
@@ -79,7 +79,7 @@ export function TextTab({
         </Select>
       </div>
       <div className="space-y-1 col-span-2">
-        <Label>Alignment</Label>
+        <Label>对齐</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <div className={inState ? 'opacity-50 pointer-events-none' : ''}>
@@ -91,7 +91,7 @@ export function TextTab({
             aria-pressed={align === 'left'}
             disabled={inState}
             onClick={() => updateLayer(selected.id, { align: 'left' } as any)}
-            title="Align left"
+            title="左对齐"
           >
             <AlignLeft className="h-4 w-4" />
           </Button>
@@ -102,7 +102,7 @@ export function TextTab({
             aria-pressed={align === 'center'}
             disabled={inState}
             onClick={() => updateLayer(selected.id, { align: 'center' } as any)}
-            title="Align center"
+            title="居中对齐"
           >
             <AlignCenter className="h-4 w-4" />
           </Button>
@@ -113,7 +113,7 @@ export function TextTab({
             aria-pressed={align === 'right'}
             disabled={inState}
             onClick={() => updateLayer(selected.id, { align: 'right' } as any)}
-            title="Align right"
+            title="右对齐"
           >
             <AlignRight className="h-4 w-4" />
           </Button>
@@ -124,18 +124,18 @@ export function TextTab({
             aria-pressed={align === 'justified'}
             disabled={inState}
             onClick={() => updateLayer(selected.id, { align: 'justified' } as any)}
-            title="Justify"
+            title="两端对齐"
           >
             <AlignJustify className="h-4 w-4" />
           </Button>
         </div>
             </div>
           </TooltipTrigger>
-          {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+          {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
         </Tooltip>
       </div>
       <div className="space-y-1 col-span-2">
-        <Label>Wrap lines</Label>
+        <Label>自动换行</Label>
         <div className="flex items-center gap-2 h-8">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -145,9 +145,9 @@ export function TextTab({
             onCheckedChange={(checked) => updateLayer(selected.id, { wrapped: (checked ? 1 : 0) as any } as any)} />
               </div>
             </TooltipTrigger>
-            {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+            {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
           </Tooltip>
-          <span className="text-xs text-muted-foreground">When on, drag horizontal bounds to wrap text.</span>
+          <span className="text-xs text-muted-foreground">开启后，拖动水平尺寸即可对文本换行。</span>
         </div>
       </div>
     </div>

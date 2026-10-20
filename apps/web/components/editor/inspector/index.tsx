@@ -127,45 +127,45 @@ export function Inspector() {
 
   const tabs = useMemo(() => {
     let baseTabs = [
-      { id: 'geometry' as TabId, icon: Box, label: 'Geometry' },
-      { id: 'compositing' as TabId, icon: Layers, label: 'Compositing' },
-      { id: 'content' as TabId, icon: Palette, label: 'Content' },
+      { id: 'geometry' as TabId, icon: Box, label: '几何' },
+      { id: 'compositing' as TabId, icon: Layers, label: '合成' },
+      { id: 'content' as TabId, icon: Palette, label: '内容' },
     ];
     if (selected?.type === 'text') {
-      baseTabs.push({ id: 'text' as TabId, icon: Type, label: 'Text' });
+      baseTabs.push({ id: 'text' as TabId, icon: Type, label: '文本' });
     }
     if (selected?.type === 'gradient') {
-      baseTabs.push({ id: 'gradient' as TabId, icon: Blend, label: 'Gradient' });
+      baseTabs.push({ id: 'gradient' as TabId, icon: Blend, label: '渐变' });
     }
     if (selected?.type === 'image') {
-      baseTabs.push({ id: 'image' as TabId, icon: ImageIcon, label: 'Image' });
+      baseTabs.push({ id: 'image' as TabId, icon: ImageIcon, label: '图片' });
     }
     if (selected?.type === 'video') {
-      baseTabs.push({ id: 'video' as TabId, icon: Video, label: 'Video' });
+      baseTabs.push({ id: 'video' as TabId, icon: Video, label: '视频' });
     }
     if (selected?.type !== 'video') {
-      baseTabs.push({ id: 'animations' as TabId, icon: Play, label: 'Animations' });
+      baseTabs.push({ id: 'animations' as TabId, icon: Play, label: '动画' });
     }
     if (doc?.meta.gyroEnabled && selected?.type === 'transform') {
-      baseTabs.push({ id: 'gyro' as TabId, icon: Smartphone, label: 'Gyro (Parallax)' });
+      baseTabs.push({ id: 'gyro' as TabId, icon: Smartphone, label: '陀螺仪（视差）' });
     }
     if (selected?.type === 'emitter') {
       baseTabs = [
-        { id: 'geometry' as TabId, icon: Box, label: 'Geometry' },
-        { id: 'compositing' as TabId, icon: Layers, label: 'Compositing' },
-        { id: 'emitter' as TabId, icon: Cog, label: 'Emitter' },
+        { id: 'geometry' as TabId, icon: Box, label: '几何' },
+        { id: 'compositing' as TabId, icon: Layers, label: '合成' },
+        { id: 'emitter' as TabId, icon: Cog, label: '发射器' },
       ]
     }
     if (selected?.type === 'replicator') {
       baseTabs = [
-        { id: 'geometry' as TabId, icon: Box, label: 'Geometry' },
-        { id: 'compositing' as TabId, icon: Layers, label: 'Compositing' },
-        { id: 'replicator' as TabId, icon: Cog, label: 'Replicator' },
-        { id: 'animations' as TabId, icon: Play, label: 'Animations' },
+        { id: 'geometry' as TabId, icon: Box, label: '几何' },
+        { id: 'compositing' as TabId, icon: Layers, label: '合成' },
+        { id: 'replicator' as TabId, icon: Cog, label: '复制器' },
+        { id: 'animations' as TabId, icon: Play, label: '动画' },
       ]
     }
     if (selected?.type !== 'transform') {
-      baseTabs.push({ id: 'filters' as TabId, icon: Filter, label: 'Filters' });
+      baseTabs.push({ id: 'filters' as TabId, icon: Filter, label: '滤镜' });
     }
     return baseTabs;
   }, [selected?.type, doc?.meta.gyroEnabled]);
@@ -197,7 +197,7 @@ export function Inspector() {
     return (
       <Card className="h-full flex flex-col overflow-hidden p-0 gap-0" data-tour-id="inspector">
         <div className={cn("px-3 py-2 border-b shrink-0 flex items-center justify-between", isCompact && "py-1 px-2")}>
-          <div className="font-medium">Inspector</div>
+          <div className="font-medium">属性面板</div>
         </div>
 
         <div
@@ -208,7 +208,7 @@ export function Inspector() {
         >
           <div className="grid grid-cols-2 gap-1.5">
             <div className="space-y-1">
-              <Label htmlFor="root-w">Width</Label>
+              <Label htmlFor="root-w">宽度</Label>
               <Input id="root-w" type="number" step="1" value={String(widthVal)}
                 onChange={(e) => {
                   const n = Number(e.target.value);
@@ -217,7 +217,7 @@ export function Inspector() {
                 }} />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="root-h">Height</Label>
+              <Label htmlFor="root-h">高度</Label>
               <Input id="root-h" type="number" step="1" value={String(heightVal)}
                 onChange={(e) => {
                   const n = Number(e.target.value);
@@ -226,11 +226,11 @@ export function Inspector() {
                 }} />
             </div>
             <div className="space-y-1 col-span-2">
-              <Label>Flip Geometry</Label>
+              <Label>翻转几何</Label>
               <div className="flex items-center gap-2 h-8">
                 <Switch checked={gf === 1}
                   onCheckedChange={(checked) => setDoc((prev) => prev ? ({ ...prev, meta: { ...prev.meta, geometryFlipped: checked ? 1 : 0 } }) : prev)} />
-                <span className="text-xs text-muted-foreground">When on, origin becomes top-left and Y increases down.</span>
+                <span className="text-xs text-muted-foreground">开启后，原点变为左上角，Y 轴向下递增。</span>
               </div>
             </div>
           </div>
@@ -243,13 +243,13 @@ export function Inspector() {
     return (
       <Card className="h-full flex flex-col overflow-hidden p-0 gap-0" data-tour-id="inspector">
         <div className={cn("px-3 py-2 border-b shrink-0 flex items-center justify-between", isCompact && "py-1 px-2")}>
-          <div className="font-medium">Inspector</div>
+          <div className="font-medium">属性面板</div>
         </div>
 
         <div className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center text-center text-muted-foreground">
             <SquareSlash className="h-20 w-20 mb-3" />
-            <div className="text-m">Select a layer to edit its properties.</div>
+            <div className="text-m">选择一个图层以编辑其属性。</div>
           </div>
         </div>
       </Card>
@@ -273,7 +273,7 @@ export function Inspector() {
     <Card className="h-full flex flex-col overflow-hidden p-0 gap-0" data-tour-id="inspector">
       <div className={cn("px-3 py-2 border-b shrink-0 flex items-center justify-between", isCompact && "py-1 px-2")}>
         <div className="flex items-center gap-3 min-w-0">
-          <div className="font-medium shrink-0">Inspector</div>
+          <div className="font-medium shrink-0">属性面板</div>
           {isCompact && (
             <div className="flex items-center gap-0.5 border-l pl-2 overflow-x-auto no-scrollbar">
               {tabs.map((tab) => {
@@ -309,9 +309,9 @@ export function Inspector() {
               size="sm"
               className="h-7 px-2"
               onClick={() => selectLayer(null)}
-              title="Deselect current layer"
+              title="取消选择当前图层"
             >
-              Deselect
+              取消选择
             </Button>
           )}
           {!isCompact && (
@@ -327,7 +327,7 @@ export function Inspector() {
                     <PanelLeft className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Sidebar Left</TooltipContent>
+                <TooltipContent>侧边栏靠左</TooltipContent>
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -340,7 +340,7 @@ export function Inspector() {
                     <PanelTop className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Sidebar Top</TooltipContent>
+                <TooltipContent>侧边栏靠上</TooltipContent>
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -353,7 +353,7 @@ export function Inspector() {
                     <PanelRight className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Sidebar Right</TooltipContent>
+                <TooltipContent>侧边栏靠右</TooltipContent>
               </Tooltip>
             </>
           )}
@@ -394,7 +394,7 @@ export function Inspector() {
         )}
 
         <div className="flex-1 overflow-y-auto p-3">
-          <div className="text-sm font-bold mb-3 capitalize">{activeTab}</div>
+          <div className="text-sm font-bold mb-3 capitalize">{tabs.find((t) => t.id === activeTab)?.label ?? activeTab}</div>
           {activeTab === 'geometry' && (
             <GeometryTab
               {...tabProps}

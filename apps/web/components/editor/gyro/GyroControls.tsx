@@ -105,7 +105,7 @@ export default function GyroControls({
           onClick={() => setControlMode('grid')}
           className="flex-1 h-7 text-[11px]"
         >
-          Grid
+          网格
         </Button>
         <Button
           size="sm"
@@ -113,7 +113,7 @@ export default function GyroControls({
           onClick={() => setControlMode('phone')}
           className="flex-1 h-7 text-[11px]"
         >
-          Phone
+          手机
         </Button>
         {deviceSupported && (
           <Button
@@ -128,7 +128,7 @@ export default function GyroControls({
             }}
             className="flex-1 h-7 text-[11px]"
           >
-            Device
+            设备
           </Button>
         )}
       </div>
@@ -147,7 +147,7 @@ export default function GyroControls({
 
       {controlMode !== 'device' && (
         <div className="text-neutral-400 flex items-center justify-center">
-          <Button title="Re-center gyro" className="text-[10px]" variant="ghost" onClick={onRecenter}>
+          <Button title="陀螺仪归中" className="text-[10px]" variant="ghost" onClick={onRecenter}>
             <Crosshair className="h-4 w-4" />
           </Button>
         </div>
@@ -231,9 +231,9 @@ function Pad({
 
       {/* axis labels */}
       <div className="mt-2 text-[10px] text-neutral-400 flex items-center justify-between w-[80px] mx-auto">
-        <span>L</span>
-        <span>center</span>
-        <span>R</span>
+        <span>左</span>
+        <span>居中</span>
+        <span>右</span>
       </div>
     </div>
   );
@@ -266,7 +266,7 @@ function DeviceGyro({ xy }: { xy: XY }) {
           </div>
         </div>
       </div>
-      <p className="mt-2 text-[11px] text-neutral-500 text-center">Tilt your device</p>
+      <p className="mt-2 text-[11px] text-neutral-500 text-center">倾斜你的设备</p>
     </div>
   );
 }
@@ -321,7 +321,7 @@ function PhoneTilt({ rotateX, rotateY, onDrag }: { rotateX: number; rotateY: num
           </div>
         </div>
       </div>
-      <p className="mt-2 text-[11px] text-neutral-500 text-center">Drag the device to change tilt</p>
+      <p className="mt-2 text-[11px] text-neutral-500 text-center">拖动设备以改变倾斜</p>
     </div>
   );
 }

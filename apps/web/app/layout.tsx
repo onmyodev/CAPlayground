@@ -4,7 +4,6 @@ import { Source_Sans_3 } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Favicon } from "@/components/favicon"
-import UnofficialDomainBanner from "@/components/unofficial-domain-banner"
 import { PostHogProvider } from "@/components/posthog-provider"
 
 const sourceSans = Source_Sans_3({
@@ -16,18 +15,18 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: "CAPlayground - CA Wallpaper Editor",
-  description: "Create beautiful animated wallpapers for iOS and iPadOS on any desktop computer",
+  title: "CAPlayground - CA 壁纸编辑器",
+  description: "在任何桌面电脑上为 iOS 和 iPadOS 创建精美的动态壁纸",
   verification: {
     google: "5CfgPBQMN4wnoC3Va9OnlfALRYaoLEekJkqMkGKLXOc",
   },
   openGraph: {
-    title: "CAPlayground - CA Wallpaper Editor",
-    description: "Create beautiful animated wallpapers for iOS and iPadOS on any desktop computer",
+    title: "CAPlayground - CA 壁纸编辑器",
+    description: "在任何桌面电脑上为 iOS 和 iPadOS 创建精美的动态壁纸",
     type: "website",
     images: [
-      { url: "/icon-light.png", alt: "CAPlayground icon (light)" },
-      { url: "/icon-dark.png", alt: "CAPlayground icon (dark)" },
+      { url: "/icon-light.png", alt: "CAPlayground 图标（浅色）" },
+      { url: "/icon-dark.png", alt: "CAPlayground 图标（深色）" },
     ],
   },
   icons: {
@@ -52,11 +51,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${sourceSans.variable}`} suppressHydrationWarning>
+    <html lang="zh-CN" className={`${sourceSans.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen bg-background text-foreground">
         <PostHogProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <UnofficialDomainBanner />
             <Favicon />
             {children}
           </ThemeProvider>

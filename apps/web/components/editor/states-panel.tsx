@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ArrowRight, Eye, Settings } from "lucide-react";
 import { useEditor } from "./editor-context";
+import { getStateLabel } from "@/lib/state-labels";
 import { useState, useMemo } from "react";
 import { AnyLayer } from "@/lib/ca/types";
 
@@ -47,7 +48,7 @@ export function StatesPanel() {
   const findLayerName = (layerId: string): string => {
     const findInLayers = (layers: AnyLayer[]): string | null => {
       for (const layer of layers) {
-        if (layer.id === layerId) return layer.name || 'Unnamed Layer';
+        if (layer.id === layerId) return layer.name || '未命名图层';
         if (layer.children?.length) {
           const found = findInLayers(layer.children);
           if (found) return found;
@@ -55,7 +56,7 @@ export function StatesPanel() {
       }
       return null;
     };
-    return findInLayers(current?.layers || []) || 'Unknown Layer';
+    return findInLayers(current?.layers || []) || '未知图层';
   };
 
   const split = current?.appearanceSplit ?? false;
@@ -110,27 +111,27 @@ export function StatesPanel() {
   return (
     <Card className="p-0 gap-0 h-full flex flex-col" data-tour-id="states-panel">
       <div className="flex items-center justify-between px-3 py-2 border-b shrink-0">
-        <div className="font-medium">States</div>
+        <div className="font-medium">状态</div>
         <div className="flex items-center gap-2">
           <Dialog open={viewAllOpen} onOpenChange={setViewAllOpen}>
             <DialogTrigger asChild>
               <Button variant="ghost" size="sm" className="h-7 px-2">
                 <Eye className="h-3.5 w-3.5 mr-1" />
-                View All
+                查看全部
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col">
             <DialogHeader>
-              <DialogTitle>State Transitions Overview</DialogTitle>
+              <DialogTitle>状态过渡总览</DialogTitle>
             </DialogHeader>
             <div className="flex-1 overflow-y-auto space-y-6 pr-2">
               {/* States Summary */}
               <div>
-                <h3 className="text-sm font-semibold mb-2">Available States</h3>
+                <h3 className="text-sm font-semibold mb-2">可用状态</h3>
                 <div className="flex flex-wrap gap-2">
                   {allStates.map(state => (
                     <Badge key={state} variant={state === active ? "default" : "secondary"}>
-                      {state}
+                      {getStateLabel(state)}
                     </Badge>
                   ))}
                 </div>
@@ -139,7 +140,7 @@ export function StatesPanel() {
               {/* State Overrides by Layer */}
               {Object.keys(overridesByLayer).length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold mb-3">State Overrides by Layer</h3>
+                  <h3 className="text-sm font-semibold mb-3">按图层的状态覆盖</h3>
                   <div className="space-y-4">
                     {Object.entries(overridesByLayer).map(([layerId, stateData]) => (
                       <div key={layerId} className="border rounded-lg p-3 bg-muted/30">
@@ -147,7 +148,7 @@ export function StatesPanel() {
                         <div className="space-y-2">
                           {Object.entries(stateData).map(([stateName, overrides]) => (
                             <div key={stateName} className="text-xs">
-                              <Badge variant="outline" className="mb-1">{stateName}</Badge>
+                              <Badge variant="outline" className="mb-1">{getStateLabel(stateName)}</Badge>
                               <div className="ml-2 space-y-1">
                                 {overrides.map((override, idx) => (
                                   <div key={idx} className="flex items-center gap-2 text-muted-foreground">
@@ -168,8 +169,8 @@ export function StatesPanel() {
 
               {Object.keys(overridesByLayer).length === 0 && (
                 <div className="text-center text-muted-foreground py-8">
-                  <p className="text-sm">No state transitions configured yet.</p>
-                  <p className="text-xs mt-1">Select a state and modify layer properties to create transitions.</p>
+                  <p className="text-sm">尚未配置任何状态过渡。</p>
+                  <p className="text-xs mt-1">选择一个状态并修改图层属性即可创建过渡。</p>
                 </div>
               )}
             </div>
@@ -183,14 +184,14 @@ export function StatesPanel() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64 p-2">
-                <DropdownMenuLabel className="text-xs">State Settings</DropdownMenuLabel>
+                <DropdownMenuLabel className="text-xs">状态设置</DropdownMenuLabel>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between py-1.5 px-1">
-                    <span className="text-xs text-muted-foreground">Light/Dark per state</span>
+                    <span className="text-xs text-muted-foreground">每个状态区分浅色/深色</span>
                     <Switch checked={split} onCheckedChange={onToggleSplit} />
                   </div>
                   <p className="text-[10px] text-muted-foreground px-1 pb-1">
-                    Light/Dark per state will make wallpaper not usable on iOS 16
+                    每个状态区分浅色/深色会导致壁纸无法在 iOS 16 上使用
                   </p>
                 </div>
               </DropdownMenuContent>
@@ -201,7 +202,7 @@ export function StatesPanel() {
 
       <div className="flex-1 overflow-hidden p-3">
         <div className="text-sm rounded-lg border bg-card shadow-sm divide-y flex flex-col overflow-hidden">
-          <div className="px-2 py-2 font-medium select-none bg-muted/30">Project States</div>
+          <div className="px-2 py-2 font-medium select-none bg-muted/30">项目状态</div>
           <div className="flex-1 overflow-auto">
             {/* base state */}
             <button
@@ -209,7 +210,7 @@ export function StatesPanel() {
               className={`w-full text-left px-2 py-2 flex items-center justify-between select-none ${active === 'Base State' ? 'bg-accent/30' : 'hover:bg-muted/50'}`}
               onClick={() => setActiveState('Base State')}
             >
-              <div className="truncate flex-1">Base State</div>
+              <div className="truncate flex-1">{getStateLabel('Base State')}</div>
             </button>
             {states.map((s) => (
               <button
@@ -218,7 +219,7 @@ export function StatesPanel() {
                 className={`w-full text-left px-2 py-2 flex items-center justify-between ${active === s ? 'bg-accent/30' : 'hover:bg-muted/50'}`}
                 onClick={() => setActiveState(s as any)}
               >
-                <div className="truncate flex-1">{s}</div>
+                <div className="truncate flex-1">{getStateLabel(s)}</div>
               </button>
             ))}
           </div>

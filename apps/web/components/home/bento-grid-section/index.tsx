@@ -23,14 +23,14 @@ import { Download, Edit, Youtube, Check, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const layers: LayerItem[] = [
-    { id: "basic", title: "Basic Layer", description: "A fundamental solid color or shape layer (CALayer) for backgrounds or simple elements.", type: "basic", exampleId: "4983462" },
-    { id: "gradient", title: "Gradient Layer", description: "Creates smooth color gradients with configurable colors, directions, and stops.", type: "gradient", exampleId: "9612103" },
-    { id: "image", title: "Image Layer", description: "Renders static images or photos, supporting scaling, positioning, and masking.", type: "image", exampleId: "9372814" },
-    { id: "video", title: "Video Layer", description: "Plays embedded video content as a looping animated element.", type: "video", exampleId: "9232798" },
-    { id: "emitter", title: "Emitter Layer", description: "Generates particle effects (CAEmitterLayer) like snow, fire, or confetti with customizable particles.", type: "emitter", exampleId: "1633426" },
-    { id: "transform", title: "Transform Layer", description: "Controls 3D transformations, perspective, and depth for immersive, realistic layer interactions.", type: "transform", exampleId: "9531199" },
-    { id: "replicator", title: "Replicator Layer", description: "Duplicates child layers in patterns (e.g., grids, circles) for efficient repetitive designs.", type: "replicator", exampleId: "5733952" },
-    { id: "liquid-glass", title: "Liquid Glass Layer", description: "A special effect layer simulating refractive, fluid glass distortion", type: "liquid-glass", exampleId: "7670567" },
+    { id: "basic", title: "基础图层", description: "用于背景或简单元素的基础纯色或形状图层（CALayer）。", type: "basic", exampleId: "4983462" },
+    { id: "gradient", title: "渐变图层", description: "创建平滑的颜色渐变，可配置颜色、方向与色标位置。", type: "gradient", exampleId: "9612103" },
+    { id: "image", title: "图片图层", description: "渲染静态图片或照片，支持缩放、定位与蒙版。", type: "image", exampleId: "9372814" },
+    { id: "video", title: "视频图层", description: "以循环动画元素的形式播放嵌入的视频内容。", type: "video", exampleId: "9232798" },
+    { id: "emitter", title: "发射器图层", description: "生成粒子效果（CAEmitterLayer），如雪花、火焰或彩纸屑，粒子可自定义。", type: "emitter", exampleId: "1633426" },
+    { id: "transform", title: "变换图层", description: "控制 3D 变换、透视与深度，实现沉浸而真实的图层交互。", type: "transform", exampleId: "9531199" },
+    { id: "replicator", title: "复制器图层", description: "以图案（例如网格、圆形）复制子图层，高效完成重复性设计。", type: "replicator", exampleId: "5733952" },
+    { id: "liquid-glass", title: "液态玻璃图层", description: "模拟折射与流动玻璃扭曲效果的特效图层", type: "liquid-glass", exampleId: "7670567" },
 ]
 
 function isVideo(src: string) {
@@ -81,10 +81,10 @@ export function BentoGridSection() {
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 py-24">
             <div className="text-center mb-16 space-y-4">
                 <h2 className="font-heading text-4xl md:text-6xl font-bold">
-                    Layers of Possibility.
+                    无限可能的图层。
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
-                    Build complex wallpaper states by combining different layer types, each with their own unique properties and animations.
+                    组合不同的图层类型来构建复杂的壁纸状态，每种图层都有各自独特的属性与动画。
                 </p>
             </div>
 
@@ -109,7 +109,7 @@ export function BentoGridSection() {
                             <DialogHeader>
                                 <DialogTitle className="text-2xl font-bold">{selectedWallpaper.name}</DialogTitle>
                                 <DialogDescription className="text-base">
-                                    by {selectedWallpaper.creator} (submitted on {selectedWallpaper.from})
+                                    作者 {selectedWallpaper.creator}（提交于 {selectedWallpaper.from}）
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="mt-4 space-y-6">
@@ -132,19 +132,19 @@ export function BentoGridSection() {
                                 </div>
 
                                 <div>
-                                    <h3 className="font-semibold mb-2">Description</h3>
+                                    <h3 className="font-semibold mb-2">描述</h3>
                                     <p className="text-sm text-muted-foreground">{selectedWallpaper.description}</p>
                                 </div>
 
                                 <div className="flex flex-col gap-3">
                                     <Button className="w-full" onClick={() => window.open(`${wallpaperData.base_url}${selectedWallpaper.file}`, '_blank')}>
                                         <Download className="h-4 w-4 mr-2" />
-                                        Download .tendies
+                                        下载 .tendies
                                     </Button>
 
                                     <Button variant="outline" className="w-full" asChild>
                                         <a href={`/wallpapers?id=${selectedWallpaper.id}&action=edit`}>
-                                            <Edit className="h-4 w-4 mr-2" /> Open in Editor
+                                            <Edit className="h-4 w-4 mr-2" /> 在编辑器中打开
                                         </a>
                                     </Button>
 
@@ -154,7 +154,7 @@ export function BentoGridSection() {
                                         onClick={() => window.open('https://www.youtube.com/watch?v=nSBQIwAaAEc', '_blank')}
                                     >
                                         <Youtube className="h-4 w-4 mr-2" />
-                                        Watch Tutorial
+                                        观看教程
                                     </Button>
 
                                     <Button
@@ -165,12 +165,12 @@ export function BentoGridSection() {
                                         {copied ? (
                                             <>
                                                 <Check className="h-4 w-4 mr-2" />
-                                                Copied
+                                                已复制
                                             </>
                                         ) : (
                                             <>
                                                 <Copy className="h-4 w-4 mr-2" />
-                                                Copy Link
+                                                复制链接
                                             </>
                                         )}
                                     </Button>

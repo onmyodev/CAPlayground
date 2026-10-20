@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const { wallpaperId } = await request.json()
     
     if (!wallpaperId) {
-      return NextResponse.json({ error: "Missing wallpaperId" }, { status: 400 })
+      return NextResponse.json({ error: "缺少 wallpaperId" }, { status: 400 })
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error("Supabase not configured for download tracking")
-      return NextResponse.json({ error: "Service not configured" }, { status: 500 })
+      return NextResponse.json({ error: "服务未配置" }, { status: 500 })
     }
 
     const userFingerprint = getUserFingerprint(request)
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ 
         success: true, 
         counted: false,
-        message: "Rate limit reached. Download not counted."
+        message: "已达下载频率上限，本次下载未计入统计。"
       })
     }
 
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
     if (!checkResponse.ok) {
       console.error("Failed to check existing stats:", await checkResponse.text())
-      return NextResponse.json({ error: "Database error" }, { status: 500 })
+      return NextResponse.json({ error: "数据库错误" }, { status: 500 })
     }
 
     const existing = await checkResponse.json()
@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
 
       if (!updateResponse.ok) {
         console.error("Failed to update downloads:", await updateResponse.text())
-        return NextResponse.json({ error: "Failed to update" }, { status: 500 })
+        return NextResponse.json({ error: "更新失败" }, { status: 500 })
       }
     } else {
       const insertResponse = await fetch(`${supabaseUrl}/rest/v1/wallpaper_stats`, {
@@ -129,13 +129,13 @@ export async function POST(request: NextRequest) {
 
       if (!insertResponse.ok) {
         console.error("Failed to insert stats:", await insertResponse.text())
-        return NextResponse.json({ error: "Failed to create" }, { status: 500 })
+        return NextResponse.json({ error: "创建失败" }, { status: 500 })
       }
     }
 
     return NextResponse.json({ success: true, counted: true })
   } catch (error) {
     console.error("Download tracking error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json({ error: "服务器内部错误" }, { status: 500 })
   }
 }

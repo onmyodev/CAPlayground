@@ -636,7 +636,7 @@ export function EditorProvider({
   const addImageLayerFromBlob = useCallback(async (blob: Blob, filename?: string) => {
     const isGif = /image\/gif/i.test((blob as any)?.type || '') || /\.gif$/i.test(filename || '');
     if (isGif) {
-      throw new Error('GIFs must be imported via Video Layer');
+      throw new Error('GIF 需通过视频图层导入');
     }
 
     let safeFilename = sanitizeFilename(filename || `pasted-${Date.now()}.png`);
@@ -713,7 +713,7 @@ export function EditorProvider({
 
   const replaceImageForLayer = useCallback(async (layerId: string, file: File) => {
     if (/image\/gif/i.test(file.type || '') || /\.gif$/i.test(file.name || '')) {
-      throw new Error('Cannot replace image with a GIF. Please use Video Layer to import GIFs.');
+      throw new Error('无法用 GIF 替换图片，请使用视频图层导入 GIF。');
     }
     // Eagerly write asset to storage
     const { file: fileToUpload, filename } = await convertSvgToPngIfNeeded(file);
@@ -748,7 +748,7 @@ export function EditorProvider({
 
   const addEmitterCellImage = useCallback(async (layerId: string, file: File) => {
     if (/image\/gif/i.test(file.type || '') || /\.gif$/i.test(file.name || '')) {
-      throw new Error('Cannot add emitter cell with a GIF. Please use Video Layer to import GIFs.');
+      throw new Error('无法用 GIF 添加发射器单元，请使用视频图层导入 GIF。');
     }
 
     const { file: fileToUpload, filename } = await convertSvgToPngIfNeeded(file);
@@ -794,7 +794,7 @@ export function EditorProvider({
 
   const replaceEmitterCellImage = useCallback(async (layerId: string, cellIndex: number, file: File) => {
     if (/image\/gif/i.test(file.type || '') || /\.gif$/i.test(file.name || '')) {
-      throw new Error('Cannot replace emitter cell image with a GIF. Please use Video Layer to import GIFs.');
+      throw new Error('无法用 GIF 替换发射器单元图片，请使用视频图层导入 GIF。');
     }
 
     const { file: fileToUpload, filename } = await convertSvgToPngIfNeeded(file);
@@ -898,7 +898,7 @@ export function EditorProvider({
 
   const addImageLayerFromFile = useCallback(async (file: File) => {
     if (/image\/gif/i.test(file.type || '') || /\.gif$/i.test(file.name || '')) {
-      throw new Error('GIFs must be imported via Video Layer');
+      throw new Error('GIF 需通过视频图层导入');
     }
 
     const { file: fileToUpload, filename } = await convertSvgToPngIfNeeded(file);
@@ -1088,7 +1088,7 @@ export function EditorProvider({
     if (isGif) {
       const AnyWin: any = window as any;
       if (!AnyWin.ImageDecoder) {
-        throw new Error('Importing GIFs as video requires a browser with ImageDecoder (WebCodecs) support.');
+        throw new Error('将 GIF 作为视频导入需要支持 ImageDecoder（WebCodecs）的浏览器。');
       }
       const buf = await file.arrayBuffer();
       const decoder: any = new AnyWin.ImageDecoder({ data: new Uint8Array(buf), type: 'image/gif' });
@@ -1109,7 +1109,7 @@ export function EditorProvider({
       canvas.width = width;
       canvas.height = height;
       const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Failed to get canvas context');
+      if (!ctx) throw new Error('无法获取画布上下文');
       const maxDuration = 12;
       const assumedFps = 15;
       const maxFrames = Math.min(gifFrameCount || 300, Math.floor(maxDuration * assumedFps));
@@ -1193,7 +1193,7 @@ export function EditorProvider({
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       URL.revokeObjectURL(videoURL);
-      throw new Error('Failed to get canvas context');
+      throw new Error('无法获取画布上下文');
     }
     for (let i = 0; i < frameCount; i++) {
       const time = (i / fps);

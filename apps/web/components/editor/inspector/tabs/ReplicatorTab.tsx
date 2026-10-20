@@ -38,7 +38,7 @@ export function ReplicatorTab({
     <div className="space-y-4">
       <div className="space-y-3">
         <div>
-          <Label>Instance Count</Label>
+          <Label>实例数量</Label>
           <Input
             type="number"
             min="1"
@@ -70,14 +70,14 @@ export function ReplicatorTab({
             }}
           />
           <p className="text-xs text-muted-foreground mt-1">
-            Number of replicated instances (including the original layer)
+            复制的实例数量（包含原始图层）
           </p>
         </div>
         <div className="space-y-2">
-          <Label>Instance Translation</Label>
+          <Label>实例位移</Label>
           <div className="grid grid-cols-3 gap-2">
             <div>
-              <Label className="text-xs text-muted-foreground">X (px)</Label>
+              <Label className="text-xs text-muted-foreground">X（px）</Label>
               <Input
                 type="number"
                 value={getBuf('translationX', String(instanceTranslation.x))}
@@ -114,7 +114,7 @@ export function ReplicatorTab({
               />
             </div>
             <div> 
-              <Label className="text-xs text-muted-foreground">Y (px)</Label>
+              <Label className="text-xs text-muted-foreground">Y（px）</Label>
               <Input
                 type="number"
                 value={getBuf('translationY', String(instanceTranslation.y))}
@@ -151,7 +151,7 @@ export function ReplicatorTab({
               />
             </div>
             <div>
-              <Label className="text-xs text-muted-foreground">Z (px)</Label>
+              <Label className="text-xs text-muted-foreground">Z（px）</Label>
               <Input
                 type="number"
                 value={getBuf('translationZ', String(instanceTranslation.z))}
@@ -189,12 +189,12 @@ export function ReplicatorTab({
             </div>
           </div>
           <p className="text-xs text-muted-foreground">
-            Translation offset for each replicated instance
+            每个复制实例的位移偏移量
           </p>
         </div>
 
         <div>
-          <Label>Instance Rotation (Z axis, degrees)</Label>
+          <Label>实例旋转（Z 轴，度）</Label>
           <Input
             type="number"
             value={getBuf('instanceRotation', String(instanceRotation))}
@@ -224,12 +224,12 @@ export function ReplicatorTab({
             }}
           />
           <p className="text-xs text-muted-foreground mt-1">
-            Rotation offset for each replicated instance
+            每个复制实例的旋转偏移量
           </p>
         </div>
 
         <div>
-          <Label>Instance Delay (seconds)</Label>
+          <Label>实例延迟（秒）</Label>
           <Input
             type="number"
             min="0"
@@ -261,7 +261,7 @@ export function ReplicatorTab({
             }}
           />
           <p className="text-xs text-muted-foreground mt-1">
-            Delay between each instance appearing (for animations)
+            每个实例出现之间的延迟（用于动画）
           </p>
         </div>
       </div>

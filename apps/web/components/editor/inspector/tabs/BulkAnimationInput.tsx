@@ -53,11 +53,11 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
         if (keyPath === 'position' || keyPath === 'bounds') {
           const parts = trimmed.split(',').map(p => p.trim());
           if (parts.length !== 2) {
-            throw new Error(`Invalid format for ${keyPath}. Expected "x, y" or "w, h" format.`);
+            throw new Error(`${keyPath} 的格式无效。预期格式为 “x, y” 或 “w, h”。`);
           }
           const [first, second] = parts.map(Number);
           if (!Number.isFinite(first) || !Number.isFinite(second)) {
-            throw new Error(`Invalid numbers in line: ${trimmed}`);
+            throw new Error(`行内数字无效：${trimmed}`);
           }
           if (keyPath === 'position') {
             values.push({ x: Math.round(first), y: Math.round(second) });
@@ -67,7 +67,7 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
         } else {
           const num = Number(trimmed);
           if (!Number.isFinite(num)) {
-            throw new Error(`Invalid number: ${trimmed}`);
+            throw new Error(`数字无效：${trimmed}`);
           }
           if (keyPath === 'opacity') {
             const percentage = Math.max(0, Math.min(100, Math.round(num)));
@@ -78,7 +78,7 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
         }
       }
     } catch (e) {
-      error = e instanceof Error ? e.message : 'Invalid format';
+      error = e instanceof Error ? e.message : '格式无效';
     }
 
     return { values, error };
@@ -101,13 +101,13 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
   const formatDescription = useMemo(() => {
     switch (keyPath) {
       case 'position':
-        return 'Format: x, y (one per line)\nExample:\n100, 50\n200, 100\n300, 150';
+        return '格式：x, y（每行一个）\n示例：\n100, 50\n200, 100\n300, 150';
       case 'bounds':
-        return 'Format: width, height (one per line)\nExample:\n100, 50\n150, 75\n200, 100';
+        return '格式：宽度, 高度（每行一个）\n示例：\n100, 50\n150, 75\n200, 100';
       case 'opacity':
-        return 'Format: percentage (one per line)\nExample:\n0\n50\n100';
+        return '格式：百分比（每行一个）\n示例：\n0\n50\n100';
       default:
-        return `Format: ${keyPath.includes('rotation') ? 'degrees' : 'number'} (one per line)\nExample:\n0\n45\n90`;
+        return `格式：${keyPath.includes('rotation') ? '角度' : '数字'}（每行一个）\n示例：\n0\n45\n90`;
     }
   }, [keyPath]);
 
@@ -122,20 +122,20 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
           className="gap-1 h-7 px-2 text-xs"
         >
           <Zap className="w-3 h-3" />
-          Bulk
+          批量
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Zap className="w-5 h-5" />
-            Bulk Animation Values - {keyPath}
+            批量动画数值 - {keyPath}
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label>Animation Values</Label>
+            <Label>动画数值</Label>
             <div className="text-xs text-muted-foreground whitespace-pre-line">
               {formatDescription}
             </div>
@@ -153,7 +153,7 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
             )}
           </div>
           <div className="space-y-2">
-            <Label>Import from File</Label>
+            <Label>从文件导入</Label>
             <div className="flex items-center gap-3">
               <input
                 ref={fileInputRef}
@@ -182,27 +182,27 @@ export function BulkAnimationInput({ keyPath, currentValues, onValuesChange, dis
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
               >
-                Choose file
+                选择文件
               </Button>
               <span className="text-xs text-muted-foreground truncate">
-                {fileName || "No file chosen"}
+                {fileName || "未选择文件"}
               </span>
             </div>
           </div>
 
           <div className="flex justify-between">
             <Badge variant="secondary">
-              {bulkText.trim().split('\n').filter(l => l.trim()).length} values
+              {bulkText.trim().split('\n').filter(l => l.trim()).length} 个数值
             </Badge>
             <div className="flex gap-2">
               <Button variant="outline" onClick={() => setIsOpen(false)}>
-                Cancel
+                取消
               </Button>
               <Button 
                 onClick={applyBulkValues} 
                 disabled={!!parseError || !bulkText.trim()}
               >
-                Apply Values
+                应用数值
               </Button>
             </div>
           </div>

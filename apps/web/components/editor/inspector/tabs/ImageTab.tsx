@@ -44,12 +44,12 @@ export function ImageTab({
   return (
     <div className="grid grid-cols-2 gap-x-1.5 gap-y-3">
       <div className="space-y-1 col-span-2">
-        <Label>Image</Label>
+        <Label>图片</Label>
         {imageSrc && (
           <div className="flex justify-center rounded-md border bg-secondary/20 p-2">
             <img
               src={imageSrc}
-              alt={selected.name || "Image layer"}
+              alt={selected.name || "图片图层"}
               className="max-h-[200px] max-w-full object-contain"
             />
           </div>
@@ -65,11 +65,11 @@ export function ImageTab({
                   disabled={inState}
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  Replace Image…
+                  替换图片…
                 </Button>
               </div>
             </TooltipTrigger>
-            {inState && <TooltipContent sideOffset={6}>Not supported for state transitions</TooltipContent>}
+            {inState && <TooltipContent sideOffset={6}>状态过渡不支持此操作</TooltipContent>}
           </Tooltip>
           <Button
             type="button"
@@ -93,7 +93,7 @@ export function ImageTab({
               }
             }}
           >
-            Reset Bounds
+            重置尺寸
           </Button>
           <input
             ref={fileInputRef}
@@ -109,7 +109,7 @@ export function ImageTab({
         </div>
       </div>
       <div className="space-y-1 col-span-2">
-        <Label>Edit</Label>
+        <Label>编辑</Label>
         <div className="flex flex-col gap-2">
           <Button
             type="button"
@@ -122,7 +122,7 @@ export function ImageTab({
               }
             }}
           >
-            Crop
+            裁剪
           </Button>
           {imageSrc && (
             <ImageCropDialog
@@ -156,7 +156,7 @@ export function ImageTab({
               }
             }}
           >
-            Blur
+            模糊
           </Button>
           {imageSrc && (
             <BlurEditor
@@ -351,7 +351,7 @@ function ImageCropDialog({
         canvas.toBlob(
           (blob) => {
             if (!blob) {
-              reject(new Error("Failed to create cropped image"));
+              reject(new Error("无法创建裁剪后的图片"));
               return;
             }
             const name = filename || "cropped-image.png";
@@ -378,9 +378,9 @@ function ImageCropDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Crop image</DialogTitle>
+          <DialogTitle>裁剪图片</DialogTitle>
           <DialogDescription>
-            Adjust the crop area and apply to replace the current image.
+            调整裁剪区域并应用，以替换当前图片。
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
@@ -436,11 +436,11 @@ function ImageCropDialog({
                 checked={maintainBounds}
                 onCheckedChange={setMaintainBounds}
               />
-              <span>Maintain bounds after crop</span>
+              <span>裁剪后保持尺寸</span>
             </div>
             {cropWidthPx !== null && cropHeightPx !== null && (
               <div>
-                Crop size: {cropWidthPx} x {cropHeightPx}px
+                裁剪尺寸：{cropWidthPx} x {cropHeightPx}px
               </div>
             )}
           </div>
@@ -450,14 +450,14 @@ function ImageCropDialog({
               variant="outline"
               onClick={() => onOpenChange(false)}
             >
-              Cancel
+              取消
             </Button>
             <Button
               type="button"
               onClick={handleApply}
               disabled={!naturalSize || applying}
             >
-              {applying ? "Cropping..." : "Apply crop"}
+              {applying ? "裁剪中…" : "应用裁剪"}
             </Button>
           </div>
         </div>
